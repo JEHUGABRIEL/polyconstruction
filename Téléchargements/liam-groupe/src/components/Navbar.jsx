@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { ChevronDown, Globe, Menu, X } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { useNavLinks, useDomains, useSiteInfo } from "../hooks/useSiteData";
 
 /**
@@ -15,9 +16,13 @@ export default function Navbar({ transparentOnTop = true }) {
   );
   const [domainsOpen, setDomainsOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [langOpen, setLangOpen] = useState(false);
   const location = useLocation();
   const closeTimer = useRef(null);
+  const langTimer = useRef(null);
   const [prevPath, setPrevPath] = useState(location.pathname);
+  const { t, i18n } = useTranslation();
+  const currentLang = i18n.language?.startsWith("en") ? "EN" : "FR";
   const { data: navLinks = [] } = useNavLinks();
   const { data: domains = [] } = useDomains();
   const { data: siteInfo = {} } = useSiteInfo();
@@ -47,8 +52,10 @@ export default function Navbar({ transparentOnTop = true }) {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isTransparent ? "bg-transparent" : "bg-white shadow-sm"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out ${
+        isTransparent
+          ? "bg-transparent"
+          : "bg-white/80 backdrop-blur-lg shadow-[0_4px_30px_rgba(0,0,0,0.08)]"
       }`}
     >
       <nav className="max-w-7xl mx-auto px-6 lg:px-10 h-[88px] flex items-center justify-between">
@@ -115,14 +122,37 @@ export default function Navbar({ transparentOnTop = true }) {
         </div>
 
         <div className="hidden lg:flex items-center gap-5">
-          <button
-            className={`flex items-center gap-1.5 font-medium ${
-              isTransparent ? "text-white/90" : "text-gray-700"
-            }`}
+          <div
+            className="relative"
+            onMouseEnter={() => { if (langTimer.current) clearTimeout(langTimer.current); setLangOpen(true); }}
+            onMouseLeave={() => { langTimer.current = setTimeout(() => setLangOpen(false), 150); }}
           >
-            <span>EN</span>
-            <Globe className="w-4 h-4" />
-          </button>
+            <button
+              className={`flex items-center gap-1.5 font-medium transition-colors ${
+                isTransparent ? "text-white/90 hover:text-white" : "text-gray-700 hover:text-ink"
+              }`}
+              onClick={() => setLangOpen((o) => !o)}
+            >
+              <span>{currentLang}</span>
+              <Globe className="w-4 h-4" />
+            </button>
+            {langOpen && (
+              <div className="absolute top-full right-0 mt-3 w-28 bg-white rounded-xl shadow-xl border border-gray-100 py-2 overflow-hidden">
+                <button
+                  onClick={() => { i18n.changeLanguage("fr"); setLangOpen(false); }}
+                  className={`w-full text-left px-4 py-2 text-sm transition-colors ${currentLang === "FR" ? "text-brand-600 font-semibold bg-brand-50" : "text-gray-700 hover:bg-gray-50"}`}
+                >
+                  Français
+                </button>
+                <button
+                  onClick={() => { i18n.changeLanguage("en"); setLangOpen(false); }}
+                  className={`w-full text-left px-4 py-2 text-sm transition-colors ${currentLang === "EN" ? "text-brand-600 font-semibold bg-brand-50" : "text-gray-700 hover:bg-gray-50"}`}
+                >
+                  English
+                </button>
+              </div>
+            )}
+          </div>
           <Link
             to="/partenaires"
             className={`px-6 py-2.5 rounded-full font-semibold transition-colors ${
@@ -131,7 +161,7 @@ export default function Navbar({ transparentOnTop = true }) {
                 : "bg-brand-500 hover:bg-brand-600 text-white"
             }`}
           >
-            Devenir partenaire
+            {t('nav.becomePartner')}
           </Link>
         </div>
 
@@ -145,44 +175,71 @@ export default function Navbar({ transparentOnTop = true }) {
       </nav>
 
       {mobileOpen && (
-        <div className="lg:hidden bg-white border-t border-gray-100 px-6 py-4 max-h-[80vh] overflow-y-auto">
-          {navLinks.map((link) =>
-            link.dropdown ? (
-              <div key={link.label} className="py-2">
-                <button
-                  className="flex items-center justify-between w-full font-medium text-gray-800 py-2"
-                  onClick={() => setDomainsOpen((o) => !o)}
+        <div className="lg:hidden bg-white border-t border-gray-100 px-6 py-6 h-[calc(100vh-88px)] overflow-y-auto flex flex-col">
+          <div className="flex-1 space-y-1">
+            {navLinks.map((link) =>
+              link.dropdown ? (
+                <div key={link.label}>
+                  <button
+                    className="flex items-center justify-between w-full font-medium text-gray-800 py-3"
+                    onClick={() => setDomainsOpen((o) => !o)}
+                  >
+                    {link.label}
+                    <ChevronDown
+                      className={`w-4 h-4 transition-transform ${domainsOpen ? "rotate-180" : ""}`}
+                    />
+                  </button>
+                  {domainsOpen && (
+                    <div className="pl-4 flex flex-col gap-1 pb-2">
+                      {domains.map((d) => (
+                        <Link
+                          key={d.slug}
+                          to={`/domaines/${d.slug}`}
+                          className="py-2.5 text-gray-600 hover:text-brand-600 transition-colors"
+                          onClick={() => setMobileOpen(false)}
+                        >
+                          {d.name}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <Link
+                  key={link.label}
+                  to={link.to}
+                  className="block py-3 font-medium text-gray-800 hover:text-brand-600 transition-colors"
+                  onClick={() => setMobileOpen(false)}
                 >
                   {link.label}
-                  <ChevronDown
-                    className={`w-4 h-4 transition-transform ${domainsOpen ? "rotate-180" : ""}`}
-                  />
+                </Link>
+              )
+            )}
+            {/* Language switch in mobile menu */}
+            <div className="border-t border-gray-100 pt-4 mt-2">
+              <p className="text-xs font-medium text-gray-400 uppercase tracking-wider mb-3">{t('nav.language')}</p>
+              <div className="flex gap-2">
+                <button
+                  onClick={() => { i18n.changeLanguage("fr"); setMobileOpen(false); }}
+                  className={`flex-1 py-2.5 rounded-xl text-sm font-medium transition-colors ${currentLang === "FR" ? "bg-brand-500 text-white" : "bg-gray-100 text-gray-600"}`}
+                >
+                  Français
                 </button>
-                {domainsOpen && (
-                  <div className="pl-4 flex flex-col gap-1">
-                    {domains.map((d) => (
-                      <Link
-                        key={d.slug}
-                        to={`/domaines/${d.slug}`}
-                        className="py-2 text-gray-600"
-                      >
-                        {d.name}
-                      </Link>
-                    ))}
-                  </div>
-                )}
+                <button
+                  onClick={() => { i18n.changeLanguage("en"); setMobileOpen(false); }}
+                  className={`flex-1 py-2.5 rounded-xl text-sm font-medium transition-colors ${currentLang === "EN" ? "bg-brand-500 text-white" : "bg-gray-100 text-gray-600"}`}
+                >
+                  English
+                </button>
               </div>
-            ) : (
-              <Link key={link.label} to={link.to} className="block py-2 font-medium text-gray-800">
-                {link.label}
-              </Link>
-            )
-          )}
+            </div>
+          </div>
           <Link
             to="/partenaires"
-            className="mt-3 block text-center px-6 py-2.5 rounded-full font-semibold bg-brand-500 text-white"
+            className="block text-center px-6 py-3 rounded-full font-semibold bg-brand-500 hover:bg-brand-600 text-white transition-colors"
+            onClick={() => setMobileOpen(false)}
           >
-            Devenir partenaire
+            {t('nav.becomePartner')}
           </Link>
         </div>
       )}

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { supabase } from "../../lib/supabase.js";
 import {
   Save, Loader2, Plus, Trash2,
@@ -30,15 +31,6 @@ const DEFAULTS = {
   aboutStats: [],
 };
 
-const SETTING_LABELS = {
-  siteInfo: "Informations générales",
-  navLinks: "Navigation",
-  footerLinks: "Pied de page",
-  homeHeroImages: "Images hero (Accueil)",
-  homeStats: "Statistiques (Accueil)",
-  aboutStats: "Statistiques (À propos)",
-};
-
 const SETTING_ICONS = {
   siteInfo: "🏠",
   navLinks: "🧭",
@@ -62,6 +54,17 @@ function safeParse(value, fallback) {
 
 // ─── Component ──────────────────────────────────────────────────────────────
 export default function AdminSiteSettings() {
+  const { t } = useTranslation();
+
+  const SETTING_LABELS = {
+    siteInfo: t("admin.settings.siteInfo"),
+    navLinks: t("admin.settings.navLinks"),
+    footerLinks: t("admin.settings.footerLinks"),
+    homeHeroImages: t("admin.settings.homeHeroImages"),
+    homeStats: t("admin.settings.homeStats"),
+    aboutStats: t("admin.settings.aboutStats"),
+  };
+
   const [settings, setSettings] = useState({});
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -108,10 +111,10 @@ export default function AdminSiteSettings() {
       .upsert({ key, value }, { onConflict: "key" });
     setSaving(false);
     if (error) {
-      showToast(`Erreur : ${error.message}`, "error");
+      showToast(t("admin.settings.errorToast", { message: error.message }), "error");
     } else {
       setDirty((prev) => ({ ...prev, [key]: false }));
-      showToast(`« ${SETTING_LABELS[key]} » enregistré ✅`);
+      showToast(t("admin.settings.savedToast", { label: SETTING_LABELS[key] }));
     }
   };
 
@@ -122,21 +125,21 @@ export default function AdminSiteSettings() {
         .from("site_settings")
         .upsert({ key, value: settings[key] }, { onConflict: "key" });
       if (error) {
-        showToast(`Erreur sur ${key} : ${error.message}`, "error");
+        showToast(t("admin.settings.errorToast", { message: `${key}: ${error.message}` }), "error");
         setSaving(false);
         return;
       }
     }
     setDirty({});
     setSaving(false);
-    showToast("Tous les paramètres enregistrés ✅");
+    showToast(t("admin.settings.allSavedToast"));
   };
 
   // ── Render helpers ──
 
-  const renderText = (key, field, label, opts = {}) => (
+  const renderText = (key, field, labelKey, opts = {}) => (
     <div key={field}>
-      <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
+      <label className="block text-sm font-medium text-gray-700 mb-1">{t(labelKey)}</label>
       {opts.multiline ? (
         <textarea
           value={settings[key]?.[field] ?? ""}
@@ -155,11 +158,11 @@ export default function AdminSiteSettings() {
     </div>
   );
 
-  const renderArrayField = (key, arrayKey, label, itemLabel, itemPlaceholder = "") => {
+  const renderArrayField = (key, arrayKey, labelKey, itemLabel, itemPlaceholder = "") => {
     const arr = settings[key]?.[arrayKey] ?? [];
     return (
       <div key={arrayKey}>
-        <label className="block text-sm font-medium text-gray-700 mb-1.5">{label}</label>
+        <label className="block text-sm font-medium text-gray-700 mb-1.5">{t(labelKey)}</label>
         <div className="space-y-2">
           {arr.map((item, i) => (
             <div key={i} className="flex items-center gap-2">
@@ -193,7 +196,7 @@ export default function AdminSiteSettings() {
           }}
           className="mt-2 text-sm text-brand-600 hover:text-brand-700 font-medium inline-flex items-center gap-1"
         >
-          <Plus className="w-3.5 h-3.5" /> Ajouter
+          <Plus className="w-3.5 h-3.5" /> {t("admin.settings.add")}
         </button>
       </div>
     );
@@ -205,26 +208,26 @@ export default function AdminSiteSettings() {
     return (
       <div className="space-y-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {renderText("siteInfo", "name", "Nom court")}
-          {renderText("siteInfo", "fullName", "Nom complet")}
+          {renderText("siteInfo", "name", "admin.settings.shortName")}
+          {renderText("siteInfo", "fullName", "admin.settings.fullName")}
         </div>
-        {renderText("siteInfo", "tagline", "Slogan")}
-        {renderText("siteInfo", "description", "Description", { multiline: true, rows: 3 })}
+        {renderText("siteInfo", "tagline", "admin.settings.tagline")}
+        {renderText("siteInfo", "description", "admin.settings.description", { multiline: true, rows: 3 })}
 
         <div className="border-t border-gray-100 pt-4">
-          <h4 className="text-sm font-semibold text-gray-700 mb-2">Adresse</h4>
-          {renderArrayField("siteInfo", "address", "", "Adresse", "Avenue des Martyrs...")}
+          <h4 className="text-sm font-semibold text-gray-700 mb-2">{t("admin.settings.address")}</h4>
+          {renderArrayField("siteInfo", "address", "admin.settings.address", "", t("admin.settings.addressPlaceholder"))}
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {renderArrayField("siteInfo", "phones", "Téléphones", "Téléphone", "+236 00 00 00 00")}
-          {renderArrayField("siteInfo", "emails", "Emails", "Email", "contact@liamgroupe.org")}
+          {renderArrayField("siteInfo", "phones", "admin.settings.phones", "", t("admin.settings.phonePlaceholder"))}
+          {renderArrayField("siteInfo", "emails", "admin.settings.emails", "", t("admin.settings.emailPlaceholder"))}
         </div>
 
-        {renderArrayField("siteInfo", "hours", "Horaires", "Horaire", "Lundi — Vendredi : 8h00 — 17h00")}
+        {renderArrayField("siteInfo", "hours", "admin.settings.hours", "", t("admin.settings.hoursPlaceholder"))}
 
         <div className="border-t border-gray-100 pt-4">
-          <h4 className="text-sm font-semibold text-gray-700 mb-3">Page Contact — Informations spécifiques</h4>
+          <h4 className="text-sm font-semibold text-gray-700 mb-3">{t("admin.settings.contactPage")}</h4>
           {renderContactPageFields()}
         </div>
       </div>
@@ -239,11 +242,11 @@ export default function AdminSiteSettings() {
         contactPage: { ...value, [field]: newVal },
       });
     };
-    const renderNestedArray = (field, label, placeholder) => {
+    const renderNestedArray = (field, labelKey, placeholder) => {
       const arr = value[field] ?? [];
       return (
         <div className="mb-3">
-          <label className="block text-xs font-medium text-gray-500 mb-1.5">{label}</label>
+          <label className="block text-xs font-medium text-gray-500 mb-1.5">{t(labelKey)}</label>
           <div className="space-y-2">
             {arr.map((item, i) => (
               <div key={i} className="flex items-center gap-2">
@@ -271,17 +274,17 @@ export default function AdminSiteSettings() {
             onClick={() => updateNested(field, [...arr, ""])}
             className="mt-1.5 text-xs text-brand-600 hover:text-brand-700 font-medium inline-flex items-center gap-1"
           >
-            <Plus className="w-3 h-3" /> Ajouter
+            <Plus className="w-3 h-3" /> {t("admin.settings.add")}
           </button>
         </div>
       );
     };
     return (
       <div className="pl-4 border-l-2 border-brand-100 space-y-2">
-        {renderNestedArray("address", "Adresse", "Secteur 3, Bangui")}
-        {renderNestedArray("phones", "Téléphones", "+236 00 00 00 00")}
-        {renderNestedArray("emails", "Emails", "contact@liamgroupe.cf")}
-        {renderNestedArray("hours", "Horaires", "Lundi — Vendredi : 8h00 — 17h00")}
+        {renderNestedArray("address", "admin.settings.address", t("admin.settings.addressPlaceholder"))}
+        {renderNestedArray("phones", "admin.settings.phones", t("admin.settings.phonePlaceholder"))}
+        {renderNestedArray("emails", "admin.settings.emails", t("admin.settings.emailPlaceholder"))}
+        {renderNestedArray("hours", "admin.settings.hours", t("admin.settings.hoursPlaceholder"))}
       </div>
     );
   };
@@ -290,7 +293,7 @@ export default function AdminSiteSettings() {
     const links = settings.navLinks ?? [];
     return (
       <div className="space-y-3">
-        <p className="text-sm text-gray-500">Liens de navigation affichés dans le menu principal.</p>
+        <p className="text-sm text-gray-500">{t("admin.settings.navLinksDesc")}</p>
         {links.map((link, i) => (
           <div key={i} className="bg-gray-50 rounded-xl p-4 border border-gray-100">
             <div className="flex items-center justify-between mb-3">
@@ -304,7 +307,7 @@ export default function AdminSiteSettings() {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div>
-                <label className="block text-xs font-medium text-gray-500 mb-1">Label</label>
+                <label className="block text-xs font-medium text-gray-500 mb-1">{t("admin.settings.linkLabel")}</label>
                 <input
                   type="text"
                   value={link.label}
@@ -314,11 +317,11 @@ export default function AdminSiteSettings() {
                     updateValue("navLinks", next);
                   }}
                   className="w-full border border-gray-200 rounded-xl px-3 py-2 outline-none focus:border-brand-400 transition-colors text-sm"
-                  placeholder="Accueil"
+                  placeholder={t("nav.home")}
                 />
               </div>
               <div>
-                <label className="block text-xs font-medium text-gray-500 mb-1">Lien (to)</label>
+                <label className="block text-xs font-medium text-gray-500 mb-1">{t("admin.settings.linkTo")}</label>
                 <input
                   type="text"
                   value={link.to}
@@ -343,7 +346,7 @@ export default function AdminSiteSettings() {
                     }}
                     className="w-4 h-4 rounded border-gray-300 text-brand-500 focus:ring-brand-500"
                   />
-                  <span className="text-xs font-medium text-gray-500">Dropdown</span>
+                  <span className="text-xs font-medium text-gray-500">{t("admin.settings.linkDD")}</span>
                 </label>
               </div>
             </div>
@@ -353,7 +356,7 @@ export default function AdminSiteSettings() {
           onClick={() => updateValue("navLinks", [...links, { label: "", to: "/", dropdown: false }])}
           className="px-4 py-2 rounded-full border border-dashed border-gray-300 text-sm text-gray-500 hover:border-brand-400 hover:text-brand-600 transition-colors inline-flex items-center gap-1.5"
         >
-          <Plus className="w-4 h-4" /> Ajouter un lien
+          <Plus className="w-4 h-4" /> {t("admin.settings.addLink")}
         </button>
       </div>
     );
@@ -362,9 +365,9 @@ export default function AdminSiteSettings() {
   const renderFooterLinks = () => {
     const data = settings.footerLinks ?? DEFAULTS.footerLinks;
     const sections = [
-      { key: "liamGroupe", label: "LIAM Groupe" },
-      { key: "domaines", label: "Domaines" },
-      { key: "agir", label: "Agir" },
+      { key: "liamGroupe", label: t("footer.liamGroupe") },
+      { key: "domaines", label: t("footer.domains") },
+      { key: "agir", label: t("footer.act") },
     ];
 
     const updateSection = (sectionKey, items) => {
@@ -373,7 +376,7 @@ export default function AdminSiteSettings() {
 
     return (
       <div className="space-y-6">
-        <p className="text-sm text-gray-500">Colonnes de navigation dans le pied de page.</p>
+        <p className="text-sm text-gray-500">{t("admin.settings.footerLinksDesc")}</p>
         {sections.map(({ key: sectionKey, label }) => {
           const items = data[sectionKey] ?? [];
           return (
@@ -417,7 +420,7 @@ export default function AdminSiteSettings() {
                 onClick={() => updateSection(sectionKey, [...items, { label: "", to: "/" }])}
                 className="mt-2 text-sm text-brand-600 hover:text-brand-700 font-medium inline-flex items-center gap-1"
               >
-                <Plus className="w-3.5 h-3.5" /> Ajouter un lien
+                <Plus className="w-3.5 h-3.5" /> {t("admin.settings.addLink")}
               </button>
             </div>
           );
@@ -430,7 +433,7 @@ export default function AdminSiteSettings() {
     const images = settings.homeHeroImages ?? [];
     return (
       <div className="space-y-3">
-        <p className="text-sm text-gray-500">Images du carousel hero de la page d'accueil (URLs Cloudinary).</p>
+        <p className="text-sm text-gray-500">{t("admin.settings.heroImagesDesc")}</p>
         {images.map((url, i) => (
           <div key={i} className="bg-gray-50 rounded-xl p-3 border border-gray-100">
             <div className="flex items-center gap-2 mb-2">
@@ -458,7 +461,7 @@ export default function AdminSiteSettings() {
                   next[i] = e.target.value;
                   updateValue("homeHeroImages", next);
                 }}
-                placeholder="https://res.cloudinary.com/..."
+                placeholder={t("admin.settings.heroImagePlaceholder")}
                 className="flex-1 border border-gray-200 rounded-xl px-3 py-2 outline-none focus:border-brand-400 transition-colors text-sm font-mono text-xs"
               />
             </div>
@@ -468,7 +471,7 @@ export default function AdminSiteSettings() {
           onClick={() => updateValue("homeHeroImages", [...images, ""])}
           className="px-4 py-2 rounded-full border border-dashed border-gray-300 text-sm text-gray-500 hover:border-brand-400 hover:text-brand-600 transition-colors inline-flex items-center gap-1.5"
         >
-          <Plus className="w-4 h-4" /> Ajouter une image
+          <Plus className="w-4 h-4" /> {t("admin.settings.addImage")}
         </button>
       </div>
     );
@@ -478,7 +481,7 @@ export default function AdminSiteSettings() {
     const stats = settings[key] ?? [];
     return (
       <div className="space-y-3">
-        <p className="text-sm text-gray-500">Paires « valeur / label » affichées dans la section {label}.</p>
+        <p className="text-sm text-gray-500">{t("admin.settings.statsDesc")} {label}.</p>
         {stats.map((stat, i) => (
           <div key={i} className="bg-gray-50 rounded-xl p-4 border border-gray-100">
             <div className="flex items-center justify-between mb-3">
@@ -492,7 +495,7 @@ export default function AdminSiteSettings() {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
-                <label className="block text-xs font-medium text-gray-500 mb-1">Valeur</label>
+                <label className="block text-xs font-medium text-gray-500 mb-1">{t("admin.settings.statValue")}</label>
                 <input
                   type="text"
                   value={stat.value}
@@ -506,7 +509,7 @@ export default function AdminSiteSettings() {
                 />
               </div>
               <div>
-                <label className="block text-xs font-medium text-gray-500 mb-1">Label</label>
+                <label className="block text-xs font-medium text-gray-500 mb-1">{t("admin.settings.statLabel")}</label>
                 <input
                   type="text"
                   value={stat.label}
@@ -526,7 +529,7 @@ export default function AdminSiteSettings() {
           onClick={() => updateValue(key, [...stats, { value: "", label: "" }])}
           className="px-4 py-2 rounded-full border border-dashed border-gray-300 text-sm text-gray-500 hover:border-brand-400 hover:text-brand-600 transition-colors inline-flex items-center gap-1.5"
         >
-          <Plus className="w-4 h-4" /> Ajouter une statistique
+          <Plus className="w-4 h-4" /> {t("admin.settings.addStat")}
         </button>
       </div>
     );
@@ -538,8 +541,8 @@ export default function AdminSiteSettings() {
       case "navLinks": return renderNavLinks();
       case "footerLinks": return renderFooterLinks();
       case "homeHeroImages": return renderHeroImages();
-      case "homeStats": return renderStats("homeStats", "Accueil");
-      case "aboutStats": return renderStats("aboutStats", "À propos");
+      case "homeStats": return renderStats("homeStats", t("nav.home"));
+      case "aboutStats": return renderStats("aboutStats", t("nav.about"));
       default: return null;
     }
   };
@@ -560,10 +563,10 @@ export default function AdminSiteSettings() {
       <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
         <div>
           <h1 className="font-heading font-bold text-2xl md:text-3xl text-gray-900">
-            Paramètres du site
+            {t("admin.settings.title")}
           </h1>
           <p className="text-gray-500 text-sm mt-0.5">
-            Gérez les informations générales, la navigation et les contenus statiques.
+            {t("admin.settings.description")}
           </p>
         </div>
         <button
@@ -572,7 +575,7 @@ export default function AdminSiteSettings() {
           className="px-5 py-2.5 rounded-full bg-brand-500 hover:bg-brand-600 disabled:opacity-40 disabled:cursor-not-allowed text-white font-semibold text-sm inline-flex items-center gap-2 transition-colors"
         >
           {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
-          Tout enregistrer
+          {t("admin.settings.saveAll")}
         </button>
       </div>
 
@@ -607,12 +610,12 @@ export default function AdminSiteSettings() {
             <button
               onClick={() => {
                 updateValue(activeTab, JSON.parse(JSON.stringify(DEFAULTS[activeTab])));
-                showToast(`« ${SETTING_LABELS[activeTab]} » réinitialisé`);
+                showToast(t("admin.settings.resetToast", { label: SETTING_LABELS[activeTab] }));
               }}
               className="px-3 py-2 rounded-full border border-gray-200 text-gray-500 hover:text-red-600 hover:border-red-200 hover:bg-red-50 text-xs font-medium inline-flex items-center gap-1.5 transition-all"
             >
               <RotateCcw className="w-3.5 h-3.5" />
-              Réinitialiser
+              {t("admin.settings.reset")}
             </button>
             <button
               onClick={() => saveSetting(activeTab)}
@@ -620,7 +623,7 @@ export default function AdminSiteSettings() {
               className="px-4 py-2 rounded-full bg-brand-500 hover:bg-brand-600 disabled:opacity-40 disabled:cursor-not-allowed text-white text-sm font-medium inline-flex items-center gap-1.5 transition-colors"
             >
               {saving ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Save className="w-3.5 h-3.5" />}
-              Enregistrer
+              {t("admin.settings.save")}
             </button>
           </div>
         </div>

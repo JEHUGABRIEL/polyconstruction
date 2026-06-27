@@ -12,6 +12,7 @@ import {
   ChevronDown,
   ArrowRight,
 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import SectionHeading from "../components/SectionHeading";
@@ -26,6 +27,7 @@ import useScrollReveal from "../hooks/useScrollReveal";
 import useUnsavedChanges from "../hooks/useUnsavedChanges";
 
 export default function Home() {
+  const { t } = useTranslation();
   const { data: domains = [] } = useDomains();
   const { data: events = [] } = useEvents();
   const { data: homeStats = [] } = useHomeStats();
@@ -113,31 +115,29 @@ export default function Home() {
         <div className="relative max-w-4xl reveal">
           <div className="flex items-center justify-center gap-3 text-brand-500 font-semibold tracking-[0.25em] text-xs uppercase mb-6 reveal">
             <span className="h-px w-10 bg-brand-500/60" />
-            Innovation · Ambition · Mission
+            {t('hero.tagline')}
             <span className="h-px w-10 bg-brand-500/60" />
           </div>
           <h1 className="font-heading font-extrabold text-4xl sm:text-5xl md:text-6xl text-white leading-tight reveal">
-            Construisons ensemble
+            {t('hero.title1')}
             <br />
-            <span className="text-brand-500">la Centrafrique de demain</span>
+            <span className="text-brand-500">{t('hero.title2')}</span>
           </h1>
           <p className="text-white/80 max-w-2xl mx-auto mt-6 leading-relaxed reveal">
-            LIAM Groupe mobilise les femmes et les jeunes centrafricains à
-            travers le sport, l'entrepreneuriat, la gastronomie solidaire et la
-            formation pour un impact durable au cœur de Bangui.
+            {t('hero.description')}
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4 mt-9 reveal">
             <Link
               to="/partenaires"
               className="px-7 py-3.5 rounded-full bg-brand-500 hover:bg-brand-600 text-white font-semibold transition-all hover:shadow-lg hover:shadow-brand-500/25"
             >
-              Devenir partenaire
+              {t('hero.ctaPartner')}
             </Link>
             <Link
               to="/evenements"
               className="px-7 py-3.5 rounded-full border border-white/40 text-white font-semibold hover:bg-white/10 transition-all inline-flex items-center gap-2"
             >
-              Voir nos événements <ArrowRight className="w-4 h-4" />
+              {t('hero.ctaEvents')} <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>
@@ -150,10 +150,10 @@ export default function Home() {
           <div className="reveal">
             <SectionHeading
               icon={LayoutGrid}
-              eyebrow="Nos actions"
+              eyebrow={t('home.domains.eyebrow')}
               variant="brand"
-              title="Nos 6 domaines d'intervention"
-              description="Des programmes concrets pour répondre aux besoins des communautés centrafricaines, avec un focus sur l'autonomisation des femmes et des jeunes."
+              title={t('home.domains.title')}
+              description={t('home.domains.description')}
             />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 stagger-children">
@@ -172,15 +172,15 @@ export default function Home() {
           <div className="flex flex-wrap items-end justify-between gap-4 mb-12 reveal">
             <div>
               <p className="text-brand-500 italic font-medium mb-2">
-                Prochainement &amp; récemment
+                {t('home.events.eyebrow')}
               </p>
-              <h2 className="font-heading font-bold text-3xl md:text-4xl">Nos événements</h2>
+              <h2 className="font-heading font-bold text-3xl md:text-4xl">{t('home.events.title')}</h2>
             </div>
             <Link
               to="/evenements"
               className="text-brand-600 font-semibold inline-flex items-center gap-1.5 hover:gap-2.5 transition-all"
             >
-              Voir tous les événements <ArrowRight className="w-4 h-4" />
+              {t('home.events.viewAll')} <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-7 stagger-children">
@@ -195,8 +195,8 @@ export default function Home() {
 
       {/* STATS */}
       <StatsBand
-        title="LIAM Groupe en chiffres"
-        description="Depuis notre création, nous œuvrons chaque jour pour un impact concret et mesurable au sein des communautés centrafricaines."
+        title={t('home.stats.title')}
+        description={t('home.stats.description')}
         stats={homeStats}
         tone="brand"
       />
@@ -207,9 +207,9 @@ export default function Home() {
           <div className="reveal">
             <SectionHeading
               icon={HeartHandshake}
-              eyebrow="Confiance"
-              title="Ils nous font confiance"
-              description="Des partenaires engagés qui soutiennent notre mission pour une Centrafrique plus forte et plus solidaire."
+              eyebrow={t('home.partners.eyebrow')}
+              title={t('home.partners.title')}
+              description={t('home.partners.description')}
             />
           </div>
 
@@ -251,7 +251,7 @@ export default function Home() {
               to="/partenaires"
               className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-brand-500 hover:bg-brand-600 text-white font-semibold transition-all hover:shadow-lg hover:shadow-brand-500/25"
             >
-              Découvrir tous nos partenaires <ArrowRight className="w-4 h-4" />
+              {t('home.partners.cta')} <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>
@@ -263,10 +263,10 @@ export default function Home() {
           <div className="reveal">
             <SectionHeading
               icon={MessageSquare}
-              eyebrow="Témoignages"
+              eyebrow={t('home.testimonials.eyebrow')}
               variant="blue"
-              title="Ce qu'ils disent de nous"
-              description="Les retours de nos partenaires, bénéficiaires et collaborateurs qui font vivre notre mission au quotidien."
+              title={t('home.testimonials.title')}
+              description={t('home.testimonials.description')}
             />
           </div>
           <TestimonialCarousel />
@@ -281,18 +281,18 @@ export default function Home() {
           <div className="reveal">
             <SectionHeading
               icon={Mail}
-              eyebrow="Contact"
+              eyebrow={t('home.contact.eyebrow')}
               variant="brand"
-              title="Parlons de votre projet"
-              description="Une idée, une proposition de partenariat, ou simplement envie d'en savoir plus ? Écrivez-nous, on vous répond rapidement."
+              title={t('home.contact.title')}
+              description={t('home.contact.description')}
             />
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start reveal">
             <div className="space-y-7 stagger-children">
-              <div className="reveal"><ContactItem icon={MapPin} label="Adresse" lines={siteInfo.address} /></div>
-              <div className="reveal"><ContactItem icon={Phone} label="Téléphone" lines={siteInfo.phones} /></div>
-              <div className="reveal"><ContactItem icon={Mail} label="Email" lines={siteInfo.emails} /></div>
-              <div className="reveal"><ContactItem icon={Clock} label="Heures d'ouverture" lines={siteInfo.hours} /></div>
+              <div className="reveal"><ContactItem icon={MapPin} label={t('home.contact.address')} lines={siteInfo.address} /></div>
+              <div className="reveal"><ContactItem icon={Phone} label={t('home.contact.phone')} lines={siteInfo.phones} /></div>
+              <div className="reveal"><ContactItem icon={Mail} label={t('home.contact.email')} lines={siteInfo.emails} /></div>
+              <div className="reveal"><ContactItem icon={Clock} label={t('home.contact.hours')} lines={siteInfo.hours} /></div>
             </div>
             <form
               onSubmit={(e) => { e.preventDefault(); setContactDirty(false); }}
@@ -300,24 +300,24 @@ export default function Home() {
               onInput={() => setContactDirty(true)}
             >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <Field label="Nom complet" placeholder="Votre nom" />
-                <Field label="Email" placeholder="votre@email.com" type="email" />
+                <Field label={t('home.contact.formName')} placeholder={t('home.contact.formNamePlaceholder')} />
+                <Field label={t('home.contact.formEmail')} placeholder={t('home.contact.formEmailPlaceholder')} type="email" />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-2">Sujet</label>
+                <label className="block text-sm font-medium mb-2">{t('home.contact.formSubject')}</label>
                 <select className="w-full border border-gray-200 rounded-xl px-4 py-3 outline-none focus:border-brand-400 text-gray-600">
-                  <option>Sélectionnez un sujet</option>
-                  <option>Partenariat</option>
-                  <option>Bénévolat</option>
-                  <option>Presse</option>
-                  <option>Autre</option>
+                  <option>{t('home.contact.formSubjectPlaceholder')}</option>
+                  <option>{t('home.contact.formSubjectOption1')}</option>
+                  <option>{t('home.contact.formSubjectOption2')}</option>
+                  <option>{t('home.contact.formSubjectOption3')}</option>
+                  <option>{t('home.contact.formSubjectOption4')}</option>
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium mb-2">Message</label>
+                <label className="block text-sm font-medium mb-2">{t('home.contact.formMessage')}</label>
                 <textarea
                   rows={5}
-                  placeholder="Dites-nous tout…"
+                  placeholder={t('home.contact.formMessagePlaceholder')}
                   className="w-full border border-gray-200 rounded-xl px-4 py-3 outline-none focus:border-brand-400 resize-none"
                 />
               </div>
@@ -325,7 +325,7 @@ export default function Home() {
                 type="submit"
                 className="w-full py-3.5 rounded-full bg-brand-500 hover:bg-brand-600 text-white font-semibold inline-flex items-center justify-center gap-2 transition-all hover:shadow-lg hover:shadow-brand-500/25"
               >
-                <Send className="w-4 h-4" /> Envoyer le message
+                <Send className="w-4 h-4" /> {t('home.contact.formSubmit')}
               </button>
             </form>
 
@@ -338,23 +338,23 @@ export default function Home() {
                     <Send className="w-6 h-6 text-amber-500" />
                   </div>
                   <h3 className="font-heading font-bold text-lg mb-2">
-                    Message non envoyé
+                    {t('home.contact.blockerTitle')}
                   </h3>
                   <p className="text-gray-500 text-sm mb-6">
-                    Vous avez commencé à écrire un message. Voulez-vous vraiment quitter cette page ?
+                    {t('home.contact.blockerText')}
                   </p>
                   <div className="flex items-center justify-center gap-3">
                     <button
                       onClick={() => blocker.reset()}
                       className="px-5 py-2.5 rounded-full border border-gray-200 text-sm font-medium hover:bg-gray-50 transition-colors"
                     >
-                      Rester
+                      {t('home.contact.blockerStay')}
                     </button>
                     <button
                       onClick={() => blocker.proceed()}
                       className="px-5 py-2.5 rounded-full bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold transition-colors"
                     >
-                      Quitter
+                      {t('home.contact.blockerLeave')}
                     </button>
                   </div>
                 </div>

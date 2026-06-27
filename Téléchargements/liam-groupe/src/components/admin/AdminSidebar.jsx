@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import {
   LayoutDashboard,
   LayoutGrid,
@@ -12,18 +12,19 @@ import {
   X,
 } from "lucide-react";
 
-const menu = [
-  { label: "Tableau de bord", section: "dashboard", icon: LayoutDashboard },
-  { label: "Domaines", section: "domains", icon: LayoutGrid },
-  { label: "Événements", section: "events", icon: CalendarDays },
-  { label: "Actualités", section: "news", icon: Newspaper },
-  { label: "Équipe", section: "team", icon: Users },
-  { label: "Partenaires", section: "partners", icon: Handshake },
-  { label: "Témoignages", section: "testimonials", icon: MessageSquareQuote },
-  { label: "Paramètres", section: "settings", icon: Settings },
-];
-
 export default function AdminSidebar({ activeSection, onNavigate, onLogout, mobileOpen, onCloseMobile }) {
+  const { t } = useTranslation();
+
+  const menu = [
+    { label: t("admin.sidebar.dashboard"), section: "dashboard", icon: LayoutDashboard },
+    { label: t("admin.sidebar.domains"), section: "domains", icon: LayoutGrid },
+    { label: t("admin.sidebar.events"), section: "events", icon: CalendarDays },
+    { label: t("admin.sidebar.news"), section: "news", icon: Newspaper },
+    { label: t("admin.sidebar.team"), section: "team", icon: Users },
+    { label: t("admin.sidebar.partners"), section: "partners", icon: Handshake },
+    { label: t("admin.sidebar.testimonials"), section: "testimonials", icon: MessageSquareQuote },
+    { label: t("admin.sidebar.settings"), section: "settings", icon: Settings },
+  ];
   const linkClass = (section) =>
     `flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
       activeSection === section
@@ -39,7 +40,7 @@ export default function AdminSidebar({ activeSection, onNavigate, onLogout, mobi
           <h2 className="font-heading font-bold text-xl text-white">
             LIAM<span className="text-brand-500">.</span>
           </h2>
-          <p className="text-white/40 text-sm mt-0.5">Administration</p>
+          <p className="text-white/40 text-sm mt-0.5">{t("admin.sidebar.admin")}</p>
         </div>
 
         <nav className="flex-1 overflow-y-auto p-4 space-y-1">
@@ -61,7 +62,7 @@ export default function AdminSidebar({ activeSection, onNavigate, onLogout, mobi
             className="flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium text-white/40 hover:text-white hover:bg-white/5 transition-all w-full"
           >
             <LogOut className="w-5 h-5" />
-            Déconnexion
+            {t("admin.sidebar.logout")}
           </button>
         </div>
       </aside>
@@ -102,7 +103,7 @@ export default function AdminSidebar({ activeSection, onNavigate, onLogout, mobi
                 className="flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium text-white/40 hover:text-white hover:bg-white/5 transition-all w-full"
               >
                 <LogOut className="w-5 h-5" />
-                Déconnexion
+                {t("admin.sidebar.logout")}
               </button>
             </div>
           </aside>

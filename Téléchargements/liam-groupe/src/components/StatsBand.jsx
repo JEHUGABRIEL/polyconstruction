@@ -1,4 +1,5 @@
 import useScrollReveal from "../hooks/useScrollReveal";
+import AnimatedCounter from "./AnimatedCounter";
 
 /**
  * StatsBand — bandeau violet très sombre avec statistiques chiffrées.
@@ -28,7 +29,7 @@ export default function StatsBand({ title, description, stats, tone = "brand" })
           {stats.map((s) => (
             <div key={s.label} className="reveal">
               <p className={`font-heading font-extrabold text-4xl md:text-5xl ${numberColor}`}>
-                {s.value}
+                <AnimatedCounter value={s.value} duration={2000} />
               </p>
               <p className="text-white/60 mt-2">{s.label}</p>
             </div>

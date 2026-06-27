@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { MapPin, Phone, Mail, Clock, Send } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { FacebookIcon, InstagramIcon, XIcon, YoutubeIcon } from "../components/SocialIcons";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -7,12 +8,16 @@ import SectionHeading from "../components/SectionHeading";
 import { useSiteInfo } from "../hooks/useSiteData";
 import { img } from "../data/siteData";
 import useUnsavedChanges from "../hooks/useUnsavedChanges";
+import useScrollReveal from "../hooks/useScrollReveal";
 
 export default function Contact() {
+  const { t } = useTranslation();
   const { data: siteInfo = {} } = useSiteInfo();
   const info = siteInfo?.contactPage ?? {};
   const [contactDirty, setContactDirty] = useState(false);
   const { blocker } = useUnsavedChanges(contactDirty);
+  const infoRef = useScrollReveal();
+  const mapRef = useScrollReveal();
 
   return (
     <div className="font-body">
@@ -21,33 +26,29 @@ export default function Contact() {
       <section className="relative h-[480px]">
         <img
           src={img("contact-hero", 1920, 700)}
-          alt="Bureaux LIAM Groupe"
+          alt={t('contact.heroAlt')}
           className="absolute inset-0 w-full h-full object-cover"
         />
       </section>
 
-      <section className="py-24 px-6">
+      <section className="py-24 px-6" ref={infoRef}>
         <div className="max-w-6xl mx-auto">
-          <SectionHeading icon={MapPin} eyebrow="Nos coordonnées" title="Restons en contact" align="left" />
+          <div className="reveal"><SectionHeading icon={MapPin} eyebrow={t('contact.eyebrow')} title={t('contact.title')} align="left" /></div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <div>
+            <div className="reveal">
               <p className="text-gray-500 leading-relaxed mb-8 -mt-4 max-w-md">
-                Notre équipe est basée à Bangui et disponible pour échanger
-                sur vos projets, vos idées de partenariat ou toute question
-                sur nos programmes.
+                {t('contact.intro')}
               </p>
-              <div className="space-y-7">
-                <ContactItem icon={MapPin} label="Adresse" lines={info.address} />
-                <ContactItem icon={Phone} label="Téléphone" lines={info.phones} />
-                <ContactItem icon={Mail} label="Email" lines={info.emails} />
-                <ContactItem icon={Clock} label="Horaires" lines={info.hours} />
+              <div className="space-y-7 stagger-children">
+                <div className="reveal"><ContactItem icon={MapPin} label={t('contact.address')} lines={info.address} /></div>
+                <div className="reveal"><ContactItem icon={Phone} label={t('contact.phone')} lines={info.phones} /></div>
+                <div className="reveal"><ContactItem icon={Mail} label={t('contact.email')} lines={info.emails} /></div>
+                <div className="reveal"><ContactItem icon={Clock} label={t('contact.hours')} lines={info.hours} /></div>
               </div>
 
               <div className="mt-10 bg-brand-50/60 rounded-2xl p-7">
-                <h3 className="font-heading font-bold mb-1">Suivez-nous</h3>
-                <p className="text-gray-500 mb-5">
-                  Restez informés de nos actualités et événements.
-                </p>
+                <h3 className="font-heading font-bold mb-1">{t('contact.socialTitle')}</h3>
+                <p className="text-gray-500 mb-5">{t('contact.socialText')}</p>
                 <div className="flex items-center gap-3">
                   {[FacebookIcon, InstagramIcon, XIcon, YoutubeIcon].map((Icon, i) => (
                     <a
@@ -65,40 +66,40 @@ export default function Contact() {
 
             <form
               onSubmit={(e) => { e.preventDefault(); setContactDirty(false); }}
-              className="bg-white border border-gray-100 shadow-card rounded-2xl p-8 space-y-5 h-fit"
+              className="bg-white border border-gray-100 shadow-card rounded-2xl p-8 space-y-5 h-fit reveal"
               onInput={() => setContactDirty(true)}
             >
-              <h3 className="font-heading font-bold text-lg">Envoyez-nous un message</h3>
+              <h3 className="font-heading font-bold text-lg">{t('contact.formTitle')}</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <Field label="Prénom" placeholder="Votre prénom" />
-                <Field label="Nom" placeholder="Votre nom" />
+                <Field label={t('contact.formFirstName')} placeholder={t('contact.formFirstNamePlaceholder')} />
+                <Field label={t('contact.formLastName')} placeholder={t('contact.formLastNamePlaceholder')} />
               </div>
-              <Field label="Email" placeholder="votre@email.com" type="email" />
+              <Field label={t('contact.formEmail')} placeholder={t('contact.formEmailPlaceholder')} type="email" />
               <div>
-                <label className="block text-sm font-medium mb-2">Sujet</label>
+                <label className="block text-sm font-medium mb-2">{t('contact.formSubject')}</label>
                 <select className="w-full border border-gray-200 rounded-xl px-4 py-3 outline-none focus:border-brand-400 text-gray-600">
-                  <option>Choisir un sujet</option>
-                  <option>Partenariat</option>
-                  <option>Bénévolat</option>
-                  <option>Presse</option>
-                  <option>Autre</option>
+                  <option>{t('contact.formSubjectPlaceholder')}</option>
+                  <option>{t('contact.formSubjectOption1')}</option>
+                  <option>{t('contact.formSubjectOption2')}</option>
+                  <option>{t('contact.formSubjectOption3')}</option>
+                  <option>{t('contact.formSubjectOption4')}</option>
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium mb-2">Message</label>
+                <label className="block text-sm font-medium mb-2">{t('contact.formMessage')}</label>
                 <textarea
                   rows={5}
                   maxLength={500}
-                  placeholder="Votre message…"
+                  placeholder={t('contact.formMessagePlaceholder')}
                   className="w-full border border-gray-200 rounded-xl px-4 py-3 outline-none focus:border-brand-400 resize-none"
                 />
-                <p className="text-gray-400 text-xs mt-1.5">Maximum 500 caractères</p>
+                <p className="text-gray-400 text-xs mt-1.5">{t('contact.formMessageMax')}</p>
               </div>
               <button
                 type="submit"
                 className="w-full py-3.5 rounded-full bg-brand-500 hover:bg-brand-600 text-white font-semibold inline-flex items-center justify-center gap-2 transition-colors"
               >
-                Envoyer le message <Send className="w-4 h-4" />
+                {t('contact.formSubmit')} <Send className="w-4 h-4" />
               </button>
             </form>
 
@@ -111,23 +112,23 @@ export default function Contact() {
                     <Send className="w-6 h-6 text-amber-500" />
                   </div>
                   <h3 className="font-heading font-bold text-lg mb-2">
-                    Message non envoyé
+                    {t('contact.blockerTitle')}
                   </h3>
                   <p className="text-gray-500 text-sm mb-6">
-                    Vous avez commencé à écrire un message. Voulez-vous vraiment quitter cette page ?
+                    {t('contact.blockerText')}
                   </p>
                   <div className="flex items-center justify-center gap-3">
                     <button
                       onClick={() => blocker.reset()}
                       className="px-5 py-2.5 rounded-full border border-gray-200 text-sm font-medium hover:bg-gray-50 transition-colors"
                     >
-                      Rester
+                      {t('contact.blockerStay')}
                     </button>
                     <button
                       onClick={() => blocker.proceed()}
                       className="px-5 py-2.5 rounded-full bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold transition-colors"
                     >
-                      Quitter
+                      {t('contact.blockerLeave')}
                     </button>
                   </div>
                 </div>
@@ -137,8 +138,8 @@ export default function Contact() {
         </div>
       </section>
 
-      <section className="px-6 pb-24">
-        <div className="max-w-6xl mx-auto">
+      <section className="px-6 pb-24" ref={mapRef}>
+        <div className="max-w-6xl mx-auto reveal">
           <div className="rounded-2xl overflow-hidden border border-gray-100 h-[420px]">
             <iframe
               title="Localisation Bangui"

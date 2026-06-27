@@ -1,20 +1,24 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import EventCard from "../components/EventCard";
 import { useEvents } from "../hooks/useSiteData";
 import { img } from "../data/siteData";
-
-const filters = [
-  { key: "tous", label: "Tous" },
-  { key: "a_venir", label: "À venir" },
-  { key: "passe", label: "Passés" },
-];
+import useScrollReveal from "../hooks/useScrollReveal";
 
 export default function Events() {
+  const { t } = useTranslation();
   const { data: events = [] } = useEvents();
   const [active, setActive] = useState("tous");
   const filtered = active === "tous" ? events : events.filter((e) => e.status === active);
+  const sectionRef = useScrollReveal();
+
+  const filters = [
+    { key: "tous", label: t('events.all') },
+    { key: "a_venir", label: t('events.upcoming') },
+    { key: "passe", label: t('events.past') },
+  ];
 
   return (
     <div className="font-body">
@@ -23,14 +27,14 @@ export default function Events() {
       <section className="relative h-[480px]">
         <img
           src={img("evenements-hero", 1920, 700)}
-          alt="Concert et spectacle"
+          alt={t('events.heroAlt')}
           className="absolute inset-0 w-full h-full object-cover"
         />
       </section>
 
-      <section className="py-24 px-6">
+      <section className="py-24 px-6" ref={sectionRef}>
         <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-center gap-3 mb-14">
+          <div className="flex items-center justify-center gap-3 mb-14 reveal">
             {filters.map((f) => (
               <button
                 key={f.key}
@@ -46,10 +50,17 @@ export default function Events() {
             ))}
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
-            {filtered.map((e) => (
-              <EventCard key={e.slug} event={e} />
-            ))}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7 stagger-children">
+            {filtered.length > 0 ? filtered.map((e) => (
+              <div key={e.slug} className="reveal">
+                <EventCard event={e} />
+              </div>
+            )) : (
+              <div className="col-span-full text-center py-16 text-gray-400">
+                <p className="text-gray-500 font-medium">{t('events.noEvents')}</p>
+                <p className="text-sm mt-1">{t('events.noEventsText')}</p>
+              </div>
+            )}
           </div>
         </div>
       </section>

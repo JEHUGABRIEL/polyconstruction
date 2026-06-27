@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useParams, Navigate } from "react-router-dom";
 import { Target, Layers, Image as ImageIcon } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import SectionHeading from "../components/SectionHeading";
@@ -12,6 +13,7 @@ import useScrollReveal from "../hooks/useScrollReveal";
 import GalleryLightbox from "../components/GalleryLightbox";
 
 export default function Domain() {
+  const { t } = useTranslation();
   const { slug } = useParams();
   const { data: domain } = useDomain(slug);
   const [lightboxIndex, setLightboxIndex] = useState(null);
@@ -37,7 +39,7 @@ export default function Domain() {
       {/* OBJECTIFS */}
       <section className="py-24 px-6" ref={objectivesRef}>
         <div className="max-w-5xl mx-auto">
-          <div className="reveal"><SectionHeading icon={Target} eyebrow="Objectifs" title="Nos ambitions pour ce domaine" /></div>
+          <div className="reveal"><SectionHeading icon={Target} eyebrow={t('domain.objectives.eyebrow')} title={t('domain.objectives.title')} /></div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 stagger-children">
             {domain.objectives.map((o, i) => (
               <div
@@ -57,7 +59,7 @@ export default function Domain() {
       {/* PROGRAMMES */}
       <section className="py-24 px-6 bg-gray-50" ref={programsRef}>
         <div className="max-w-6xl mx-auto">
-          <div className="reveal"><SectionHeading icon={Layers} eyebrow="Programmes" title="Nos actions concrètes" /></div>
+          <div className="reveal"><SectionHeading icon={Layers} eyebrow={t('domain.programs.eyebrow')} title={t('domain.programs.title')} /></div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-7 stagger-children">
             {domain.programs.map((p) => (
               <div key={p.title} className="bg-white rounded-2xl border border-gray-100 shadow-card p-7 reveal hover:lift transition-all duration-300">
@@ -78,7 +80,7 @@ export default function Domain() {
       {/* GALERIE */}
       <section className="py-24 px-6" ref={galleryRef}>
         <div className="max-w-6xl mx-auto">
-          <div className="reveal"><SectionHeading icon={ImageIcon} eyebrow="Galerie" title="En images" /></div>
+          <div className="reveal"><SectionHeading icon={ImageIcon} eyebrow={t('domain.gallery.eyebrow')} title={t('domain.gallery.title')} /></div>
           {domain.gallery.length > 0 && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 stagger-children">
               {domain.gallery.map((src, i) => (
@@ -95,7 +97,7 @@ export default function Domain() {
                       <div className="opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
                         <span className="inline-flex items-center gap-2 bg-white/90 text-gray-900 text-sm font-semibold px-4 py-2 rounded-full shadow-lg">
                           <ImageIcon className="w-4 h-4" />
-                          Agrandir
+                          {t('domain.gallery.enlarge')}
                         </span>
                       </div>
                     </div>
@@ -107,8 +109,8 @@ export default function Domain() {
           {domain.gallery.length === 0 && (
             <div className="text-center py-16 text-gray-400">
               <ImageIcon className="w-12 h-12 mx-auto mb-3 opacity-40" />
-              <p className="text-gray-500 font-medium">Aucune image disponible</p>
-              <p className="text-sm mt-1">La galerie sera bientôt enrichie.</p>
+              <p className="text-gray-500 font-medium">{t('domain.gallery.empty')}</p>
+              <p className="text-sm mt-1">{t('domain.gallery.emptySub')}</p>
             </div>
           )}
         </div>
@@ -123,7 +125,7 @@ export default function Domain() {
         />
       )}
 
-      <ActCTA title={`Soutenez ${domain.name}`} />
+      <ActCTA title={`${t('domain.cta.support')} ${domain.name}`} />
 
       <Footer />
     </div>

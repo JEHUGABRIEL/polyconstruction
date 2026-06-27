@@ -6,6 +6,7 @@ import AdminSidebar from "../components/admin/AdminSidebar";
 import AdminDashboard from "../components/admin/AdminDashboard";
 import AdminContentManager from "../components/admin/AdminContentManager";
 import AdminSiteSettings from "../components/admin/AdminSiteSettings";
+import useFocusTrap from "../hooks/useFocusTrap";
 
 export default function Admin() {
   const navigate = useNavigate();
@@ -13,6 +14,7 @@ export default function Admin() {
   const [section, setSection] = useState("dashboard");
   const [mobileOpen, setMobileOpen] = useState(false);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const [closing, setClosing] = useState(false);
 
   useEffect(() => {
     const stored = localStorage.getItem("liam-admin-authenticated");
@@ -25,6 +27,7 @@ export default function Admin() {
 
   const handleLogout = () => {
     setShowLogoutModal(true);
+    setClosing(false);
   };
 
   const confirmLogout = () => {
@@ -33,9 +36,19 @@ export default function Admin() {
     setShowLogoutModal(false);
   };
 
+  const startCloseAnimation = useCallback(() => {
+    if (closing) return;
+    setClosing(true);
+    setTimeout(() => {
+      setShowLogoutModal(false);
+      setClosing(false);
+    }, 300);
+  }, [closing]);
+
   const cancelLogout = useCallback(() => {
-    setShowLogoutModal(false);
-  }, []);
+    if (closing) return;
+    startCloseAnimation();
+  }, [closing, startCloseAnimation]);
 
   // Close modal on Escape key & lock body scroll
   useEffect(() => {
@@ -50,6 +63,8 @@ export default function Admin() {
       document.removeEventListener("keydown", onKeyDown);
     };
   }, [showLogoutModal, cancelLogout]);
+
+  const logoutModalRef = useFocusTrap(showLogoutModal);
 
   const handleNavigate = (s) => {
     setSection(s);
@@ -106,13 +121,14 @@ export default function Admin() {
       {/* Logout confirmation modal */}
       {showLogoutModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
-          {/* Backdrop avec animation d'apparition */}
+          {/* Backdrop avec animation d'apparition / disparition */}
           <div
-            className="absolute inset-0 bg-black/60 backdrop-blur-md animate-fade-in"
+            className={`absolute inset-0 bg-black/60 backdrop-blur-md ${closing ? "animate-fade-out" : "animate-fade-in"}`}
             onClick={cancelLogout}
           />
           <div
-            className="relative bg-gradient-to-b from-[#1a0a2e] to-[#0f001d] border border-white/[0.08] rounded-2xl shadow-2xl w-full max-w-sm mx-4 p-6 animate-scale-in"
+            ref={logoutModalRef}
+            className={`relative bg-gradient-to-b from-[#1a0a2e] to-[#0f001d] border border-white/[0.08] rounded-2xl shadow-2xl w-full max-w-sm mx-4 p-6 ${closing ? "animate-scale-out" : "animate-scale-in"}`}
             role="dialog"
             aria-modal="true"
             aria-labelledby="logout-modal-title"

@@ -1,7 +1,9 @@
 import { useEffect, useCallback, useState } from "react";
 import { X, ChevronLeft, ChevronRight, Maximize2, Minimize2 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export default function GalleryLightbox({ images, initialIndex = 0, onClose }) {
+  const { t } = useTranslation();
   const [index, setIndex] = useState(initialIndex);
   const [loaded, setLoaded] = useState({});
   const [zoomed, setZoomed] = useState(false);
@@ -51,7 +53,7 @@ export default function GalleryLightbox({ images, initialIndex = 0, onClose }) {
       className="fixed inset-0 z-[100] flex items-center justify-center animate-fade-in"
       role="dialog"
       aria-modal="true"
-      aria-label="Visionneuse d'images"
+      aria-label={t('gallery.ariaLabel')}
     >
       {/* Backdrop with blur */}
       <div
@@ -70,14 +72,14 @@ export default function GalleryLightbox({ images, initialIndex = 0, onClose }) {
           <button
             onClick={() => setZoomed((z) => !z)}
             className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center text-white/70 hover:text-white hover:bg-white/20 transition-all"
-            aria-label={zoomed ? "Réduire" : "Agrandir"}
+            aria-label={zoomed ? t('gallery.zoomOut') : t('gallery.zoomIn')}
           >
             {zoomed ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
           </button>
           <button
             onClick={onClose}
             className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center text-white/70 hover:text-white hover:bg-white/20 transition-all"
-            aria-label="Fermer"
+            aria-label={t('gallery.close')}
           >
             <X className="w-5 h-5" />
           </button>
@@ -89,7 +91,7 @@ export default function GalleryLightbox({ images, initialIndex = 0, onClose }) {
         <button
           onClick={(e) => { e.stopPropagation(); goPrev(); }}
           className="absolute left-2 sm:left-6 z-10 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center text-white/70 hover:text-white hover:bg-white/20 transition-all hover:scale-110 active:scale-95"
-          aria-label="Image précédente"
+          aria-label={t('gallery.previous')}
         >
           <ChevronLeft className="w-6 h-6" />
         </button>
@@ -136,7 +138,7 @@ export default function GalleryLightbox({ images, initialIndex = 0, onClose }) {
         <button
           onClick={(e) => { e.stopPropagation(); goNext(); }}
           className="absolute right-2 sm:right-6 z-10 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center text-white/70 hover:text-white hover:bg-white/20 transition-all hover:scale-110 active:scale-95"
-          aria-label="Image suivante"
+          aria-label={t('gallery.next')}
         >
           <ChevronRight className="w-6 h-6" />
         </button>

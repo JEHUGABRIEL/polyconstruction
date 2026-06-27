@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useTranslation, Trans } from "react-i18next";
 import { supabase } from "../../lib/supabase.js";
 import AdminImageUpload from "./AdminImageUpload";
 import AdminGalleryUpload from "./AdminGalleryUpload";
@@ -8,94 +9,100 @@ import {
   ExternalLink,
 } from "lucide-react";
 
-// ─── Field definitions per table ────────────────────────────────────────────
-const TABLES = {
-  domains: {
-    name: "Domaines",
-    labelKey: "name",
-    orderField: "order_index",
-    fields: [
-      { key: "slug", label: "Slug", type: "text", required: true, placeholder: "mon-domaine" },
-      { key: "name", label: "Nom", type: "text", required: true },
-      { key: "category", label: "Catégorie", type: "text" },
-      { key: "icon", label: "Icône", type: "text", placeholder: "heart, briefcase, etc." },
-      { key: "short_description", label: "Description courte", type: "textarea" },
-      { key: "hero_image", label: "Image hero", type: "image" },
-      { key: "objectives", label: "Objectifs (JSON)", type: "json" },
-      { key: "programs", label: "Programmes (JSON)", type: "json" },
-      { key: "stats", label: "Statistiques (JSON)", type: "json" },
-      { key: "gallery", label: "Galerie", type: "gallery" },
-    ],
-  },
-  events: {
-    name: "Événements",
-    labelKey: "title",
-    orderField: "order_index",
-    fields: [
-      { key: "slug", label: "Slug", type: "text", required: true },
-      { key: "title", label: "Titre", type: "text", required: true },
-      { key: "description", label: "Description", type: "textarea" },
-      { key: "date", label: "Date", type: "text", placeholder: "15 Août 2026" },
-      { key: "location", label: "Lieu", type: "text" },
-      { key: "image", label: "Image", type: "image" },
-      { key: "gallery", label: "Galerie", type: "gallery" },
-      { key: "status", label: "Statut", type: "select", options: ["a_venir", "passe"] },
-      { key: "category", label: "Catégorie", type: "text" },
-    ],
-  },
-  news: {
-    name: "Actualités",
-    labelKey: "title",
-    orderField: "order_index",
-    fields: [
-      { key: "slug", label: "Slug", type: "text", required: true },
-      { key: "title", label: "Titre", type: "text", required: true },
-      { key: "excerpt", label: "Extrait", type: "textarea" },
-      { key: "image", label: "Image", type: "image" },
-      { key: "gallery", label: "Galerie", type: "gallery" },
-      { key: "date", label: "Date", type: "text", placeholder: "12 Juin 2026" },
-      { key: "tag", label: "Tag", type: "text", placeholder: "ACTUALITÉ" },
-    ],
-  },
-  team: {
-    name: "Équipe",
-    labelKey: "name",
-    orderField: "order_index",
-    fields: [
-      { key: "name", label: "Nom", type: "text", required: true },
-      { key: "role", label: "Rôle", type: "text" },
-      { key: "description", label: "Description", type: "textarea" },
-      { key: "image", label: "Photo", type: "image" },
-    ],
-  },
-  partners: {
-    name: "Partenaires",
-    labelKey: "name",
-    orderField: "order_index",
-    fields: [
-      { key: "name", label: "Nom", type: "text", required: true },
-      { key: "subtitle", label: "Sous-titre", type: "text" },
-      { key: "description", label: "Description", type: "textarea" },
-      { key: "logo", label: "Logo", type: "image" },
-      { key: "initial", label: "Initiale", type: "text", placeholder: "F" },
-      { key: "color", label: "Couleur", type: "text", placeholder: "#8A0015" },
-      { key: "category", label: "Catégorie", type: "text" },
-      { key: "collaboration", label: "Collaboration", type: "textarea" },
-      { key: "website", label: "Site web", type: "url" },
-    ],
-  },
-  testimonials: {
-    name: "Témoignages",
-    labelKey: "name",
-    orderField: "order_index",
-    fields: [
-      { key: "name", label: "Nom", type: "text", required: true },
-      { key: "role", label: "Rôle", type: "text" },
-      { key: "quote", label: "Citation", type: "textarea", required: true },
-      { key: "image", label: "Photo", type: "image" },
-    ],
-  },
-};
+// ─── Field definitions per table (translated in component) ─────────────────
+function getTableConfig(t) {
+  const fl = (key) => t("admin.contentManager.fieldLabels." + key);
+  const tn = (key) => t("admin.contentManager.tableNames." + key);
+  const ph = (key) => t("admin.contentManager." + key + "Placeholder");
+
+  return {
+    domains: {
+      name: tn("domains"),
+      labelKey: "name",
+      orderField: "order_index",
+      fields: [
+        { key: "slug", label: fl("slug"), type: "text", required: true, placeholder: ph("slug") },
+        { key: "name", label: fl("name"), type: "text", required: true },
+        { key: "category", label: fl("category"), type: "text" },
+        { key: "icon", label: fl("icon"), type: "text", placeholder: ph("icon") },
+        { key: "short_description", label: fl("short_description"), type: "textarea" },
+        { key: "hero_image", label: fl("hero_image"), type: "image" },
+        { key: "objectives", label: fl("objectives"), type: "json" },
+        { key: "programs", label: fl("programs"), type: "json" },
+        { key: "stats", label: fl("stats"), type: "json" },
+        { key: "gallery", label: fl("gallery"), type: "gallery" },
+      ],
+    },
+    events: {
+      name: tn("events"),
+      labelKey: "title",
+      orderField: "order_index",
+      fields: [
+        { key: "slug", label: fl("slug"), type: "text", required: true },
+        { key: "title", label: fl("title"), type: "text", required: true },
+        { key: "description", label: fl("description"), type: "textarea" },
+        { key: "date", label: fl("date"), type: "text", placeholder: ph("date") },
+        { key: "location", label: fl("location"), type: "text" },
+        { key: "image", label: fl("image"), type: "image" },
+        { key: "gallery", label: fl("gallery"), type: "gallery" },
+        { key: "status", label: fl("status"), type: "select", options: ["a_venir", "passe"] },
+        { key: "category", label: fl("category"), type: "text" },
+      ],
+    },
+    news: {
+      name: tn("news"),
+      labelKey: "title",
+      orderField: "order_index",
+      fields: [
+        { key: "slug", label: fl("slug"), type: "text", required: true },
+        { key: "title", label: fl("title"), type: "text", required: true },
+        { key: "excerpt", label: fl("excerpt"), type: "textarea" },
+        { key: "image", label: fl("image"), type: "image" },
+        { key: "gallery", label: fl("gallery"), type: "gallery" },
+        { key: "date", label: fl("date"), type: "text", placeholder: ph("date") },
+        { key: "tag", label: fl("tag"), type: "text", placeholder: ph("tag") },
+      ],
+    },
+    team: {
+      name: tn("team"),
+      labelKey: "name",
+      orderField: "order_index",
+      fields: [
+        { key: "name", label: fl("name"), type: "text", required: true },
+        { key: "role", label: fl("role"), type: "text" },
+        { key: "description", label: fl("description"), type: "textarea" },
+        { key: "image", label: fl("photo"), type: "image" },
+      ],
+    },
+    partners: {
+      name: tn("partners"),
+      labelKey: "name",
+      orderField: "order_index",
+      fields: [
+        { key: "name", label: fl("name"), type: "text", required: true },
+        { key: "subtitle", label: fl("subtitle"), type: "text" },
+        { key: "description", label: fl("description"), type: "textarea" },
+        { key: "logo", label: fl("logo"), type: "image" },
+        { key: "initial", label: fl("initial"), type: "text", placeholder: ph("initial") },
+        { key: "color", label: fl("color"), type: "text", placeholder: ph("color") },
+        { key: "category", label: fl("category"), type: "text" },
+        { key: "collaboration", label: fl("collaboration"), type: "textarea" },
+        { key: "website", label: fl("website"), type: "url" },
+      ],
+    },
+    testimonials: {
+      name: tn("testimonials"),
+      labelKey: "name",
+      orderField: "order_index",
+      fields: [
+        { key: "name", label: fl("name"), type: "text", required: true },
+        { key: "role", label: fl("role"), type: "text" },
+        { key: "quote", label: fl("quote"), type: "textarea", required: true },
+        { key: "image", label: fl("photo"), type: "image" },
+      ],
+    },
+  };
+}
 
 // ─── Column display config ─────────────────────────────────────────────────
 const TABLE_COLS = {
@@ -109,6 +116,8 @@ const TABLE_COLS = {
 
 // ─── Component ──────────────────────────────────────────────────────────────
 export default function AdminContentManager({ table }) {
+  const { t } = useTranslation();
+  const TABLES = getTableConfig(t);
   const config = TABLES[table];
   const columns = TABLE_COLS[table] || [];
   const [rows, setRows] = useState([]);
@@ -288,14 +297,14 @@ export default function AdminContentManager({ table }) {
           <h1 className="font-heading font-bold text-2xl md:text-3xl text-gray-900">
             {config.name}
           </h1>
-          <p className="text-gray-500 text-sm mt-0.5">{rows.length} élément{rows.length !== 1 ? "s" : ""}</p>
+          <p className="text-gray-500 text-sm mt-0.5">{t("admin.contentManager.elementCount", { count: rows.length })}</p>
         </div>
         <button
           onClick={() => setEditing("new")}
           className="px-5 py-2.5 rounded-full bg-brand-500 hover:bg-brand-600 text-white font-semibold text-sm inline-flex items-center gap-2 transition-colors"
         >
           <Plus className="w-4 h-4" />
-          Ajouter
+          {t("admin.contentManager.add")}
         </button>
       </div>
 
@@ -305,7 +314,7 @@ export default function AdminContentManager({ table }) {
           <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
           <input
             type="text"
-            placeholder="Rechercher…"
+            placeholder={t("admin.contentManager.search")}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-xl outline-none focus:border-brand-400 transition-colors text-sm"
@@ -316,7 +325,7 @@ export default function AdminContentManager({ table }) {
           className="px-4 py-2.5 border border-gray-200 rounded-xl text-sm font-medium hover:bg-gray-50 transition-colors inline-flex items-center gap-1.5"
         >
           <ArrowUpDown className="w-4 h-4" />
-          Ordre {sortDir === "asc" ? "↑" : "↓"}
+          {sortDir === "asc" ? t("admin.contentManager.orderAsc") : t("admin.contentManager.orderDesc")}
         </button>
       </div>
 
@@ -327,8 +336,8 @@ export default function AdminContentManager({ table }) {
         </div>
       ) : filtered.length === 0 ? (
         <div className="text-center py-20 text-gray-400">
-          <p className="font-semibold text-gray-500">Aucun élément</p>
-          <p className="text-sm mt-1">Ajoutez un élément pour commencer.</p>
+          <p className="font-semibold text-gray-500">{t("admin.contentManager.empty")}</p>
+          <p className="text-sm mt-1">{t("admin.contentManager.emptyText")}</p>
         </div>
       ) : (
         <div className="overflow-x-auto rounded-2xl border border-gray-100 bg-white">
@@ -340,7 +349,7 @@ export default function AdminContentManager({ table }) {
                     {config.fields.find((f) => f.key === col)?.label || col}
                   </th>
                 ))}
-                <th className="text-right px-5 py-3.5 font-semibold text-gray-600 w-24">Actions</th>
+                <th className="text-right px-5 py-3.5 font-semibold text-gray-600 w-24">{t("admin.contentManager.actions")}</th>
               </tr>
             </thead>
             <tbody>
@@ -348,7 +357,7 @@ export default function AdminContentManager({ table }) {
                 <tr key={row.id} className="border-b border-gray-50 hover:bg-gray-50/50 transition-colors">
                   {columns.map((col) => (
                     <td key={col} className="px-5 py-3.5 text-gray-700 max-w-[250px] truncate">
-                      {renderCell(row, col)}
+                      {renderCell(row, col, t)}
                     </td>
                   ))}
                   <td className="px-5 py-3.5 text-right">
@@ -356,14 +365,14 @@ export default function AdminContentManager({ table }) {
                       <button
                         onClick={() => setEditing(row)}
                         className="p-2 rounded-lg hover:bg-gray-100 text-gray-500 hover:text-brand-600 transition-colors"
-                        title="Modifier"
+                        title={t("admin.contentManager.edit")}
                       >
                         <Pencil className="w-4 h-4" />
                       </button>
                       <button
                         onClick={() => setDeleting(row)}
                         className="p-2 rounded-lg hover:bg-red-50 text-gray-500 hover:text-red-600 transition-colors"
-                        title="Supprimer"
+                        title={t("admin.contentManager.delete")}
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>
@@ -387,7 +396,7 @@ export default function AdminContentManager({ table }) {
           <div className="relative bg-white rounded-2xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
             <div className="sticky top-0 bg-white border-b border-gray-100 px-6 py-4 flex items-center justify-between rounded-t-2xl z-10">
               <h2 className="font-heading font-bold text-lg">
-                {editing === "new" ? "Nouveau " + config.name.slice(0, -1) : "Modifier"}
+                {editing === "new" ? t("admin.contentManager.newItem") + " " + config.name : t("admin.contentManager.modify")}
               </h2>
               <button onClick={() => {
                 if (formDirty) { setConfirmClose(true); return; }
@@ -422,7 +431,7 @@ export default function AdminContentManager({ table }) {
                   }}
                   className="px-5 py-2.5 rounded-full border border-gray-200 text-sm font-medium hover:bg-gray-50 transition-colors"
                 >
-                  Annuler
+                  {t("admin.contentManager.cancel")}
                 </button>
                 <button
                   type="submit"
@@ -430,7 +439,7 @@ export default function AdminContentManager({ table }) {
                   className="px-5 py-2.5 rounded-full bg-brand-500 hover:bg-brand-600 disabled:opacity-60 text-white text-sm font-semibold inline-flex items-center gap-2 transition-colors"
                 >
                   {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
-                  Enregistrer
+                  {t("admin.contentManager.save")}
                 </button>
               </div>
             </form>
@@ -438,30 +447,41 @@ export default function AdminContentManager({ table }) {
         </div>
       )}
 
-      {/* Modal de confirmation independant — changements non sauvegardes */}
+      {/* Unsaved changes confirmation modal */}
       {confirmClose && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center px-4">
-          <div className="fixed inset-0 bg-black/50" onClick={() => setConfirmClose(false)} />
-          <div className="relative bg-white rounded-2xl shadow-xl p-6 w-full max-w-sm text-center">
-            <div className="mx-auto mb-4 w-14 h-14 rounded-full bg-amber-50 flex items-center justify-center">
+        <div className="fixed inset-0 z-[60] flex items-center justify-center px-4 animate-fade-in">
+          <div
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            onClick={() => setConfirmClose(false)}
+          />
+          <div
+            className="relative bg-white rounded-2xl shadow-2xl p-6 w-full max-w-sm text-center animate-scale-in"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="confirm-close-title"
+          >
+            <div className="mx-auto mb-4 w-14 h-14 rounded-full bg-gradient-to-br from-amber-50 to-amber-100 flex items-center justify-center ring-1 ring-amber-200">
               <Save className="w-6 h-6 text-amber-500" />
             </div>
-            <h3 className="font-heading font-bold text-lg mb-2">Changements non sauvegardes</h3>
-            <p className="text-gray-500 text-sm mb-6">
-              Vous avez des modifications non enregistrees. Voulez-vous vraiment quitter sans sauvegarder ?
+            <h3 id="confirm-close-title" className="font-heading font-bold text-lg mb-2">
+              {t("admin.contentManager.confirmClose")}
+            </h3>
+            <p className="text-gray-500 text-sm mb-6 leading-relaxed">
+              {t("admin.contentManager.confirmCloseText")}
             </p>
             <div className="flex items-center justify-center gap-3">
               <button
                 onClick={() => setConfirmClose(false)}
-                className="px-5 py-2.5 rounded-full border border-gray-200 text-sm font-medium hover:bg-gray-50 transition-colors"
+                autoFocus
+                className="flex-1 px-5 py-2.5 rounded-xl border border-gray-200 text-sm font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 transition-all active:scale-[0.98]"
               >
-                Rester
+                {t("admin.contentManager.confirmCloseStay")}
               </button>
               <button
                 onClick={() => { setConfirmClose(false); setEditing(null); setFormDirty(false); }}
-                className="px-5 py-2.5 rounded-full bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold transition-colors"
+                className="flex-1 px-5 py-2.5 rounded-xl bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold shadow-lg shadow-brand-500/25 hover:shadow-brand-500/40 transition-all active:scale-[0.98]"
               >
-                Quitter sans sauvegarder
+                {t("admin.contentManager.confirmCloseLeave")}
               </button>
             </div>
           </div>
@@ -470,30 +490,41 @@ export default function AdminContentManager({ table }) {
 
       {/* ── Delete Confirmation ── */}
       {deleting && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
-          <div className="fixed inset-0 bg-black/50" onClick={() => setDeleting(null)} />
-          <div className="relative bg-white rounded-2xl shadow-xl p-6 w-full max-w-sm text-center">
-            <div className="mx-auto mb-4 w-14 h-14 rounded-full bg-red-50 flex items-center justify-center">
+        <div className="fixed inset-0 z-50 flex items-center justify-center px-4 animate-fade-in">
+          <div
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            onClick={() => setDeleting(null)}
+          />
+          <div
+            className="relative bg-white rounded-2xl shadow-2xl p-6 w-full max-w-sm text-center animate-scale-in"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="delete-modal-title"
+          >
+            <div className="mx-auto mb-4 w-14 h-14 rounded-full bg-gradient-to-br from-red-50 to-red-100 flex items-center justify-center ring-1 ring-red-200">
               <Trash2 className="w-6 h-6 text-red-500" />
             </div>
-            <h3 className="font-heading font-bold text-lg mb-2">Confirmer la suppression</h3>
-            <p className="text-gray-500 text-sm mb-6">
-              Êtes-vous sûr de vouloir supprimer{" "}
-              <strong>{deleting[config.labelKey]}</strong> ? Cette action est
-              irréversible.
+            <h3 id="delete-modal-title" className="font-heading font-bold text-lg mb-2">
+              {t("admin.contentManager.confirmDelete")}
+            </h3>
+            <p className="text-gray-500 text-sm mb-6 leading-relaxed">
+              <Trans i18nKey="admin.contentManager.confirmDeleteText" values={{ name: deleting[config.labelKey] }}>
+                Êtes-vous sûr de vouloir supprimer <strong>{deleting[config.labelKey]}</strong> ? Cette action est irréversible.
+              </Trans>
             </p>
             <div className="flex items-center justify-center gap-3">
               <button
                 onClick={() => setDeleting(null)}
-                className="px-5 py-2.5 rounded-full border border-gray-200 text-sm font-medium hover:bg-gray-50 transition-colors"
+                autoFocus
+                className="flex-1 px-5 py-2.5 rounded-xl border border-gray-200 text-sm font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 transition-all active:scale-[0.98]"
               >
-                Annuler
+                {t("admin.contentManager.cancel")}
               </button>
               <button
                 onClick={() => handleDelete(deleting.id)}
-                className="px-5 py-2.5 rounded-full bg-red-500 hover:bg-red-600 text-white text-sm font-semibold transition-colors"
+                className="flex-1 px-5 py-2.5 rounded-xl bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white text-sm font-semibold shadow-lg shadow-red-500/25 hover:shadow-red-500/40 transition-all active:scale-[0.98]"
               >
-                Supprimer
+                {t("admin.contentManager.delete")}
               </button>
             </div>
           </div>
@@ -503,14 +534,14 @@ export default function AdminContentManager({ table }) {
   );
 }
 
-function renderCell(row, col) {
+function renderCell(row, col, t) {
   const val = row[col];
   if (!val) return <span className="text-gray-300">—</span>;
   if (col === "image" || col === "logo" || col === "hero_image") {
     return (
       <a href={val} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-brand-600 hover:underline">
         <ImageIcon className="w-4 h-4 shrink-0" />
-        <span className="truncate max-w-[160px]">Voir</span>
+        <span className="truncate max-w-[160px]">{t("admin.contentManager.viewImage")}</span>
         <ExternalLink className="w-3 h-3" />
       </a>
     );
@@ -521,7 +552,7 @@ function renderCell(row, col) {
     return (
       <span className="inline-flex items-center gap-1.5 text-brand-600">
         <ImageIcon className="w-4 h-4" />
-        <span>{count} image{count > 1 ? "s" : ""}</span>
+        <span>{t("admin.contentManager.imageCount", { count })}</span>
       </span>
     );
   }
@@ -531,7 +562,7 @@ function renderCell(row, col) {
       <span className={`inline-block px-2.5 py-1 rounded-full text-xs font-semibold ${
         isUpcoming ? "bg-green-50 text-green-700" : "bg-gray-100 text-gray-500"
       }`}>
-        {isUpcoming ? "À venir" : "Passé"}
+        {isUpcoming ? t("admin.contentManager.upcoming") : t("admin.contentManager.past")}
       </span>
     );
   }

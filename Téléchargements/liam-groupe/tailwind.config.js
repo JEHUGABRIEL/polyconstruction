@@ -49,11 +49,13 @@ export default {
       },
       animation: {
         "fade-in": "fadeIn 0.6s ease-out forwards",
+        "fade-out": "fadeOut 0.3s ease-in forwards",
         "fade-up": "fadeUp 0.6s ease-out forwards",
         "fade-down": "fadeDown 0.6s ease-out forwards",
         "fade-left": "fadeLeft 0.6s ease-out forwards",
         "fade-right": "fadeRight 0.6s ease-out forwards",
         "scale-in": "scaleIn 0.5s ease-out forwards",
+        "scale-out": "scaleOut 0.3s ease-in forwards",
         "slide-up": "slideUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards",
         "zoom-in": "zoomIn 0.5s ease-out forwards",
         "blur-in": "blurIn 0.5s ease-out forwards",
@@ -83,6 +85,14 @@ export default {
         scaleIn: {
           "0%": { opacity: "0", transform: "scale(0.95)" },
           "100%": { opacity: "1", transform: "scale(1)" },
+        },
+        scaleOut: {
+          "0%": { opacity: "1", transform: "scale(1)" },
+          "100%": { opacity: "0", transform: "scale(0.95)" },
+        },
+        fadeOut: {
+          "0%": { opacity: "1" },
+          "100%": { opacity: "0" },
         },
         slideUp: {
           "0%": { opacity: "0", transform: "translateY(60px)" },

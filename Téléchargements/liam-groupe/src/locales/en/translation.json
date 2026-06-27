@@ -1,0 +1,413 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "domains": "Domains",
+    "events": "Events",
+    "news": "News",
+    "partners": "Partners",
+    "contact": "Contact",
+    "becomePartner": "Become a partner",
+    "language": "Language"
+  },
+  "hero": {
+    "tagline": "Innovation · Ambition · Mission",
+    "title1": "Let's build together",
+    "title2": "the Central Africa of tomorrow",
+    "description": "LIAM Groupe mobilizes Central African women and youth through sports, entrepreneurship, community gastronomy, and training for sustainable impact in the heart of Bangui.",
+    "ctaPartner": "Become a partner",
+    "ctaEvents": "See our events",
+    "seeMore": "See more"
+  },
+  "home": {
+    "domains": {
+      "eyebrow": "Our actions",
+      "title": "Our 6 areas of intervention",
+      "description": "Concrete programs to meet the needs of Central African communities, with a focus on empowering women and youth."
+    },
+    "events": {
+      "eyebrow": "Upcoming & recent",
+      "title": "Our events",
+      "viewAll": "View all events"
+    },
+    "stats": {
+      "title": "LIAM Groupe by the numbers",
+      "description": "Since our founding, we work every day for concrete and measurable impact within Central African communities."
+    },
+    "partners": {
+      "eyebrow": "Trust",
+      "title": "They trust us",
+      "description": "Committed partners who support our mission for a stronger and more united Central Africa.",
+      "cta": "Discover all our partners"
+    },
+    "testimonials": {
+      "eyebrow": "Testimonials",
+      "title": "What they say about us",
+      "description": "Feedback from our partners, beneficiaries, and collaborators who bring our mission to life every day."
+    },
+    "contact": {
+      "eyebrow": "Contact",
+      "title": "Let's talk about your project",
+      "description": "An idea, a partnership proposal, or just want to know more? Write to us, we'll get back to you quickly.",
+      "address": "Address",
+      "phone": "Phone",
+      "email": "Email",
+      "hours": "Business hours",
+      "formName": "Full name",
+      "formNamePlaceholder": "Your name",
+      "formEmail": "Email",
+      "formEmailPlaceholder": "your@email.com",
+      "formSubject": "Subject",
+      "formSubjectPlaceholder": "Select a subject",
+      "formSubjectOption1": "Partnership",
+      "formSubjectOption2": "Volunteering",
+      "formSubjectOption3": "Press",
+      "formSubjectOption4": "Other",
+      "formMessage": "Message",
+      "formMessagePlaceholder": "Tell us everything…",
+      "formSubmit": "Send message",
+      "blockerTitle": "Message not sent",
+      "blockerText": "You started writing a message. Do you really want to leave this page?",
+      "blockerStay": "Stay",
+      "blockerLeave": "Leave"
+    },
+    "joinCTA": {
+      "title1": "Join the adventure",
+      "title2": "human and supportive",
+      "description": "Become a partner or sponsor of LIAM Groupe and associate your image with concrete actions that change lives in the Central African Republic.",
+      "cta": "Become a partner"
+    }
+  },
+  "about": {
+    "heroAlt": "Youth in training",
+    "mission": {
+      "eyebrow": "Our reason for being",
+      "title": "Innovation · Ambition · Mission"
+    },
+    "intro1": "Founded in 2015 in Bangui, LIAM Groupe is a Central African non-governmental organization working for sustainable community development through social innovation, sports, female entrepreneurship, and culture.",
+    "intro2": "Our name embodies three core values: <1>Innovation</1> in our approaches, <2>Ambition</2> in our goals, and <3>Mission</3> in our unwavering commitment to Central African youth and women.",
+    "vision": {
+      "title": "Our vision",
+      "text": "A Central Africa where every woman and young person has the tools to thrive and actively contribute to national development."
+    },
+    "missionBlock": {
+      "title": "Our mission",
+      "text": "To mobilize, train, and support Central African women and youth through concrete programs in six complementary areas of intervention."
+    },
+    "team": {
+      "eyebrow": "Our team",
+      "title": "The faces of LIAM Groupe",
+      "description": "A passionate and determined team that puts its expertise at the service of the Central African community."
+    },
+    "images": {
+      "alt1": "Youth in workshop",
+      "alt2": "Women in meeting"
+    }
+  },
+  "contact": {
+    "heroAlt": "LIAM Groupe Offices",
+    "eyebrow": "Our coordinates",
+    "title": "Stay in touch",
+    "intro": "Our team is based in Bangui and available to discuss your projects, partnership ideas, or any questions about our programs.",
+    "address": "Address",
+    "phone": "Phone",
+    "email": "Email",
+    "hours": "Hours",
+    "socialTitle": "Follow us",
+    "socialText": "Stay informed about our news and events.",
+    "formTitle": "Send us a message",
+    "formFirstName": "First name",
+    "formFirstNamePlaceholder": "Your first name",
+    "formLastName": "Last name",
+    "formLastNamePlaceholder": "Your last name",
+    "formEmail": "Email",
+    "formEmailPlaceholder": "your@email.com",
+    "formSubject": "Subject",
+    "formSubjectPlaceholder": "Choose a subject",
+    "formSubjectOption1": "Partnership",
+    "formSubjectOption2": "Volunteering",
+    "formSubjectOption3": "Press",
+    "formSubjectOption4": "Other",
+    "formMessage": "Message",
+    "formMessagePlaceholder": "Your message…",
+    "formMessageMax": "Maximum 500 characters",
+    "formSubmit": "Send message",
+    "blockerTitle": "Message not sent",
+    "blockerText": "You started writing a message. Do you really want to leave this page?",
+    "blockerStay": "Stay",
+    "blockerLeave": "Leave"
+  },
+  "domain": {
+    "objectives": {
+      "eyebrow": "Objectives",
+      "title": "Our ambitions for this area"
+    },
+    "programs": {
+      "eyebrow": "Programs",
+      "title": "Our concrete actions"
+    },
+    "gallery": {
+      "eyebrow": "Gallery",
+      "title": "In pictures",
+      "empty": "No images available",
+      "emptySub": "The gallery will be updated soon.",
+      "enlarge": "Enlarge"
+    },
+    "cta": {
+      "eyebrow": "Take action",
+      "support": "Support",
+      "description": "Would you like to contribute to the development of this program?<br/>Contact us to discuss it.",
+      "contact": "Contact us",
+      "viewEvents": "See our events"
+    }
+  },
+  "domainsIndex": {
+    "heroAlt": "Areas of intervention",
+    "eyebrow": "Domains",
+    "title": "Our areas of intervention",
+    "description": "LIAM Groupe focuses its actions on six complementary areas for a global and sustainable impact in the Central African Republic."
+  },
+  "events": {
+    "heroAlt": "LIAM Groupe Events",
+    "eyebrow": "Events",
+    "title": "Our events",
+    "description": "Conferences, sports tournaments, charity galas, cooking workshops… Discover the calendar of upcoming events organized by LIAM Groupe in Bangui and the prefectures.",
+    "upcoming": "Upcoming",
+    "past": "Past",
+    "all": "All",
+    "filterCategory": "Category",
+    "filterStatus": "Status",
+    "register": "Register",
+    "viewDetails": "View details",
+    "noEvents": "No events found",
+    "noEventsText": "There are no events in this category yet."
+  },
+  "news": {
+    "heroAlt": "LIAM Groupe News",
+    "eyebrow": "News",
+    "title": "Our news",
+    "description": "Follow the latest news from LIAM Groupe: projects, partnerships, upcoming events and impact of our actions on the ground.",
+    "readMore": "Read article",
+    "noNews": "No news at the moment",
+    "noNewsText": "Come back soon, new articles will be published regularly."
+  },
+  "partners": {
+    "heroAlt": "Our partners",
+    "eyebrow": "Partners",
+    "title": "Our partners",
+    "description": "They support us and contribute to bringing our mission to life every day. Discover the organizations, companies and institutions that accompany us.",
+    "collaboration": "Collaboration",
+    "website": "Website",
+    "becomePartner": "Become a partner",
+    "cta": {
+      "eyebrow": "Join us",
+      "title": "Become a partner of LIAM Groupe",
+      "description": "Would you like to support our actions in Central Africa? Join our network of partners and actively participate in the country's development.",
+      "apply": "Apply for partnership",
+      "contact": "Contact us"
+    }
+  },
+  "footer": {
+    "description": "Central African non-profit organization active in events, female entrepreneurship, sports, community gastronomy and youth training in Bangui.",
+    "newsletterPlaceholder": "Your email for the newsletter",
+    "newsletterButton": "Subscribe",
+    "contactTitle": "Contact",
+    "contactLink": "Contact us",
+    "liamGroupe": "LIAM Groupe",
+    "domains": "Domains",
+    "act": "Take action",
+    "copyright": "© 2026 LIAM Groupe. All rights reserved — Bangui, Central African Republic",
+    "privacy": "Privacy policy"
+  },
+  "gallery": {
+    "close": "Close",
+    "previous": "Previous image",
+    "next": "Next image",
+    "zoomIn": "Zoom in",
+    "zoomOut": "Zoom out",
+    "ariaLabel": "Image viewer"
+  },
+  "statsBand": {
+    "title": "LIAM Groupe by the numbers",
+    "description": "Since our founding, we work every day for concrete and measurable impact within Central African communities."
+  },
+  "admin": {
+    "login": {
+      "title": "Administration",
+      "subtitle": "LIAM Groupe — Secure access",
+      "email": "Email",
+      "password": "Password",
+      "emailPlaceholder": "admin@liamgroupe.org",
+      "passwordPlaceholder": "Your password",
+      "submit": "Sign in",
+      "wait": "Wait",
+      "error": "Invalid credentials",
+      "rateLimit": "Too many attempts. Try again in {{seconds}} seconds.",
+      "attemptsLeft_one": "Invalid email or password. {{count}} attempt remaining.",
+      "attemptsLeft_other": "Invalid email or password. {{count}} attempts remaining.",
+      "connectionError": "Connection error:",
+      "backToSite": "Back to site"
+    },
+    "sidebar": {
+      "dashboard": "Dashboard",
+      "domains": "Domains",
+      "events": "Events",
+      "news": "News",
+      "team": "Team",
+      "partners": "Partners",
+      "testimonials": "Testimonials",
+      "settings": "Settings",
+      "logout": "Logout",
+      "admin": "Administration"
+    },
+    "dashboard": {
+      "title": "Dashboard",
+      "description": "Overview of LIAM Groupe website content.",
+      "manageTitle": "Content management",
+      "manageText": "Use the sidebar navigation to manage each type of content.",
+      "teamMembers": "Team members"
+    },
+    "contentManager": {
+      "add": "Add",
+      "search": "Search…",
+      "sort": "Order",
+      "orderAsc": "Order ↑",
+      "orderDesc": "Order ↓",
+      "empty": "No items",
+      "emptyText": "Add an item to get started.",
+      "edit": "Edit",
+      "delete": "Delete",
+      "new": "New",
+      "modify": "Edit",
+      "save": "Save",
+      "cancel": "Cancel",
+      "actions": "Actions",
+      "viewImage": "View",
+      "upcoming": "Upcoming",
+      "past": "Past",
+      "imageCount_one": "{{count}} image",
+      "imageCount_other": "{{count}} images",
+      "elementCount_one": "{{count}} element",
+      "elementCount_other": "{{count}} elements",
+      "confirmDelete": "Confirm deletion",
+      "confirmDeleteText": "Are you sure you want to delete <1>{{name}}</1>? This action is irreversible.",
+      "confirmClose": "Unsaved changes",
+      "confirmCloseText": "You have unsaved changes. Do you really want to leave without saving?",
+      "confirmCloseStay": "Stay",
+      "confirmCloseLeave": "Leave without saving",
+      "error": "Error",
+      "newItem": "New",
+      "fieldLabels": {
+        "slug": "Slug",
+        "name": "Name",
+        "category": "Category",
+        "icon": "Icon",
+        "short_description": "Short description",
+        "hero_image": "Hero image",
+        "objectives": "Objectives (JSON)",
+        "programs": "Programs (JSON)",
+        "stats": "Statistics (JSON)",
+        "gallery": "Gallery",
+        "title": "Title",
+        "description": "Description",
+        "date": "Date",
+        "location": "Location",
+        "image": "Image",
+        "status": "Status",
+        "excerpt": "Excerpt",
+        "tag": "Tag",
+        "role": "Role",
+        "photo": "Photo",
+        "subtitle": "Subtitle",
+        "logo": "Logo",
+        "initial": "Initial",
+        "color": "Color",
+        "collaboration": "Collaboration",
+        "website": "Website",
+        "quote": "Quote"
+      },
+      "tableNames": {
+        "domains": "Domains",
+        "events": "Events",
+        "news": "News",
+        "team": "Team",
+        "partners": "Partners",
+        "testimonials": "Testimonials"
+      },
+      "slugPlaceholder": "my-domain",
+      "iconPlaceholder": "heart, briefcase, etc.",
+      "datePlaceholder": "August 15, 2026",
+      "tagPlaceholder": "NEWS",
+      "initialPlaceholder": "F",
+      "colorPlaceholder": "#8A0015"
+    },
+    "settings": {
+      "title": "Site settings",
+      "description": "Manage general information, navigation and static content.",
+      "saveAll": "Save all",
+      "save": "Save",
+      "reset": "Reset",
+      "siteInfo": "General information",
+      "navLinks": "Navigation",
+      "footerLinks": "Footer",
+      "homeHeroImages": "Hero images (Home)",
+      "homeStats": "Statistics (Home)",
+      "aboutStats": "Statistics (About)",
+      "resetToast": "« {{label}} » reset",
+      "savedToast": "« {{label}} » saved ✅",
+      "allSavedToast": "All settings saved ✅",
+      "errorToast": "Error: {{message}}",
+      "shortName": "Short name",
+      "fullName": "Full name",
+      "tagline": "Tagline",
+      "description": "Description",
+      "address": "Address",
+      "phones": "Phones",
+      "emails": "Emails",
+      "hours": "Hours",
+      "contactPage": "Contact Page — Specific information",
+      "addLink": "Add link",
+      "addStat": "Add statistic",
+      "addImage": "Add image",
+      "add": "Add",
+      "linkLabel": "Label",
+      "linkTo": "Link (to)",
+      "linkDD": "Dropdown",
+      "statValue": "Value",
+      "statLabel": "Label",
+      "navLinksDesc": "Navigation links displayed in the main menu.",
+      "footerLinksDesc": "Navigation columns in the footer.",
+      "heroImagesDesc": "Hero carousel images on the homepage (Cloudinary URLs).",
+      "statsDesc": "« value / label » pairs displayed in the",
+      "addressPlaceholder": "Avenue des Martyrs...",
+      "phonePlaceholder": "+236 00 00 00 00",
+      "emailPlaceholder": "contact@liamgroupe.org",
+      "hoursPlaceholder": "Monday — Friday: 8:00 AM — 5:00 PM",
+      "heroImagePlaceholder": "https://res.cloudinary.com/..."
+    },
+    "logoutModal": {
+      "title": "Logout",
+      "text": "Are you sure you want to log out of the administration interface?",
+      "cancel": "Cancel",
+      "confirm": "Logout"
+    }
+  },
+  "common": {
+    "loading": "Loading…",
+    "error": "An error occurred",
+    "noContent": "No content available",
+    "view": "View",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "seeMore": "See more",
+    "learnMore": "Learn more",
+    "element_zero": "0 elements",
+    "element_one": "{{count}} element",
+    "element_other": "{{count}} elements",
+    "images_zero": "—",
+    "images_one": "{{count}} image",
+    "images_other": "{{count}} images"
+  }
+}

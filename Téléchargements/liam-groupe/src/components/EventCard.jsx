@@ -1,13 +1,8 @@
 import { CalendarDays, MapPin } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
-/**
- * EventCard a deux variantes fidèles aux captures :
- * - compact (aperçu page d'accueil) : pas de pill catégorie sur l'image,
- *   une pastille catégorie texte après la description, pas de bouton.
- * - complète (page Événements) : pill catégorie blanche sur l'image,
- *   bouton "S'inscrire" pour les événements à venir.
- */
 export default function EventCard({ event, compact = false }) {
+  const { t } = useTranslation();
   const isUpcoming = event.status === "a_venir";
   return (
     <div className="bg-white rounded-2xl border border-gray-100 shadow-card overflow-hidden flex flex-col h-full hover:lift transition-all duration-300 group">
@@ -18,7 +13,7 @@ export default function EventCard({ event, compact = false }) {
             isUpcoming ? "bg-brand-500 text-white" : "bg-ink/80 text-white"
           }`}
         >
-          {isUpcoming ? "À venir" : "Passé"}
+          {isUpcoming ? t('events.upcoming') : t('events.past')}
         </span>
         {!compact && (
           <span className="absolute bottom-4 left-4 px-3 py-1 rounded-full text-xs font-semibold bg-white/95 text-gray-700">
@@ -43,7 +38,7 @@ export default function EventCard({ event, compact = false }) {
           </span>
         ) : isUpcoming ? (
           <button className="mt-5 w-full py-3 rounded-full border border-brand-100 text-brand-600 font-semibold hover:bg-brand-50 transition-colors">
-            S'inscrire →
+            {t('events.register')} →
           </button>
         ) : null}
       </div>
