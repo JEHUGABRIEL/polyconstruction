@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
 import ErrorBoundary from "./components/ErrorBoundary";
 import Home from "./pages/Home";
@@ -11,24 +11,33 @@ import Partners from "./pages/Partners";
 import Contact from "./pages/Contact";
 import Admin from "./pages/Admin";
 
-export default function App() {
+function Layout() {
   return (
-    <BrowserRouter>
+    <ErrorBoundary>
       <ScrollToTop />
-      <ErrorBoundary>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/a-propos" element={<About />} />
-          <Route path="/actualites" element={<News />} />
-          <Route path="/evenements" element={<Events />} />
-          <Route path="/domaines" element={<DomainsIndex />} />
-          <Route path="/domaines/:slug" element={<Domain />} />
-          <Route path="/partenaires" element={<Partners />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/admin" element={<Admin />} />
-          <Route path="*" element={<Home />} />
-        </Routes>
-      </ErrorBoundary>
-    </BrowserRouter>
+      <Outlet />
+    </ErrorBoundary>
   );
+}
+
+const router = createBrowserRouter([
+  {
+    element: <Layout />,
+    children: [
+      { path: "/", element: <Home /> },
+      { path: "/a-propos", element: <About /> },
+      { path: "/actualites", element: <News /> },
+      { path: "/evenements", element: <Events /> },
+      { path: "/domaines", element: <DomainsIndex /> },
+      { path: "/domaines/:slug", element: <Domain /> },
+      { path: "/partenaires", element: <Partners /> },
+      { path: "/contact", element: <Contact /> },
+      { path: "/admin", element: <Admin /> },
+      { path: "*", element: <Home /> },
+    ],
+  },
+]);
+
+export default function App() {
+  return <RouterProvider router={router} />;
 }
