@@ -1191,7 +1191,7 @@ export function AdminPage() {
   }, [products]);
 
   return (
-    <div className="min-h-screen bg-slate-50 pt-[72px] md:pt-20">
+    <div className="min-h-screen bg-slate-50">
       {/* Top bar */}
       <div className="fixed top-0 left-0 right-0 z-40 bg-white border-b border-slate-200" style={{ marginTop: settings.promoEnabled ? "40px" : 0 }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
@@ -1206,37 +1206,52 @@ export function AdminPage() {
             >
               {mobileNavOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
-            <button onClick={handleLogoutClick} className="px-3 py-1.5 rounded-lg text-xs font-medium border border-slate-200 text-slate-600 hover:bg-red-50 hover:text-red-600 transition-all flex items-center gap-1.5">
-              <LogOut className="w-3.5 h-3.5" /> Déconnexion
-            </button>
+
           </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex gap-8">
-          {/* Sidebar */}
-          <aside className={`w-[380px] xl:w-[500px] flex-shrink-0 h-screen overflow-y-auto bg-white shadow-lg border-r border-slate-200 ${mobileNavOpen ? "block" : "hidden"} lg:block`}>
-            <nav className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden sticky top-28">
-              {NAV_ITEMS.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => { setSection(item.id); setMobileNavOpen(false); }}
-                  className={`w-full flex items-center gap-3 px-4 py-3 text-sm font-medium transition-all text-left ${
-                    section === item.id
-                      ? "bg-blue-50 text-blue-700 border-r-2 border-blue-600"
-                      : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
-                  }`}
-                >
-                  <item.icon className={`w-4 h-4 ${section === item.id ? "text-blue-600" : "text-slate-400"}`} />
-                  {item.label}
-                </button>
-              ))}
-            </nav>
-          </aside>
+      {/* Sidebar - fixed left */}
+      <aside className={`w-[380px] xl:w-[500px] bg-white shadow-lg border-r border-slate-200 fixed left-0 z-30 overflow-y-auto ${mobileNavOpen ? "block" : "hidden"} lg:block`}
+        style={{
+          top: settings.promoEnabled ? '112px' : '72px',
+          height: '1200px',
+        } as React.CSSProperties}
+      >
+        <nav className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+          {NAV_ITEMS.map((item) => (
+            <button
+              key={item.id}
+              onClick={() => { setSection(item.id); setMobileNavOpen(false); }}
+              className={`w-full flex items-center gap-3 px-4 py-3 text-sm font-medium transition-all text-left ${
+                section === item.id
+                  ? "bg-blue-50 text-blue-700 border-r-2 border-blue-600"
+                  : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+              }`}
+            >
+              <item.icon className={`w-4 h-4 ${section === item.id ? "text-blue-600" : "text-slate-400"}`} />
+              {item.label}
+            </button>
+          ))}
+        </nav>
 
-          {/* Content */}
-          <main className="flex-1 min-w-0">
+        {/* Déconnexion */}
+        <button
+          onClick={handleLogoutClick}
+          className="w-full flex items-center gap-3 px-4 py-3.5 mt-4 text-sm font-medium text-red-600 hover:bg-red-50 rounded-xl transition-all text-left"
+        >
+          <LogOut className="w-4 h-4" />
+          Déconnexion
+        </button>
+      </aside>
+
+      {/* Content */}
+      <main className="ml-[380px] xl:ml-[500px] h-screen overflow-y-auto"
+        style={{
+          paddingTop: settings.promoEnabled ? '112px' : '72px',
+        } as React.CSSProperties}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             {/* Dashboard */}
             {section === "dashboard" && (
               <div>
@@ -1329,11 +1344,9 @@ export function AdminPage() {
             {section === "quotes" && <QuotesSection />}
             {section === "slides" && <SlidesSection />}
             {section === "testimonials" && <TestimonialsSection />}
-            {section === "partners" && <PartnersSection />}
-            {section === "settings" && <SettingsSection />}
-          </main>
+            {section === "partners" && <PartnersSection />}          {section === "settings" && <SettingsSection />}
         </div>
-      </div>
+      </main>
 
       {/* Logout confirmation modal */}
       {showLogoutConfirm && (
