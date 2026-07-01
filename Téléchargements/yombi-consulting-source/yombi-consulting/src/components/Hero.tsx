@@ -2,22 +2,25 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import heroCard from '../assets/hero-card.png';
-import founderRobe from '../assets/founder-robe.png';
-import founderOfficeLarge from '../assets/founder-office-large.png';
-import founderOfficeSmall from '../assets/founder-office-small.png';
 
-// Photos du cabinet utilisées comme arrière-plan du carrousel Hero
+
+// Images Unsplash utilisées comme arrière-plan du carrousel Hero
 const bgSlides = [
-  heroCard,
-  founderRobe,
-  founderOfficeLarge,
-  founderOfficeSmall,
+  'https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1920&q=80',
+  'https://images.unsplash.com/photo-1589829545856-d6215354972e?w=1920&q=80',
+  'https://images.unsplash.com/photo-1505664194779-8be5b456637e?w=1920&q=80',
+  'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&q=80',
+  'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1920&q=80',
 ];
 
+interface Slide {
+  badge: string;
+  title: string;
+  titleHighlight: string;
+  description: string;
+}
+
 // Met en surbrillance un mot-clé dans le titre en l'entourant d'un span coloré
-// Exemple : "Votre Partenaire Stratégique" avec highlight="Stratégique"
-// donne : "Votre Partenaire " + <span>Stratégique</span>
 function renderTitle(title: string, highlight: string) {
   if (!title.includes(highlight)) return title;
   const [before, after] = title.split(highlight);
@@ -37,8 +40,15 @@ const slideVariants = {
   exit: { opacity: 0, scale: 1.05 },
 };
 
+const textVariants = {
+  enter: { opacity: 0, y: 30 },
+  center: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: -30 },
+};
+
 export function Hero() {
   const { t } = useTranslation();
+  const slides = t('hero.slides', { returnObjects: true }) as Slide[];
   const [currentSlide, setCurrentSlide] = useState(0);
   const [direction, setDirection] = useState(1);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -111,22 +121,31 @@ export function Hero() {
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="max-w-3xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <span className="inline-block py-1 px-3 rounded-full bg-amber-500/20 text-amber-400 text-sm font-semibold tracking-wider mb-6 border border-amber-500/30">
-              {t('hero.badge')}
-            </span>
+          <div className="min-h-[280px] sm:min-h-[240px]">
+            <AnimatePresence mode="wait" custom={direction}>
+              <motion.div
+                key={currentSlide}
+                custom={direction}
+                variants={textVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+              >
+                <span className="inline-block py-1 px-3 rounded-full bg-amber-500/20 text-amber-400 text-sm font-semibold tracking-wider mb-6 border border-amber-500/30">
+                  {slides[currentSlide]?.badge}
+                </span>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 font-serif">
-              {renderTitle(t('hero.title'), t('hero.titleHighlight'))}
-            </h1>
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 font-serif">
+                  {renderTitle(slides[currentSlide]?.title, slides[currentSlide]?.titleHighlight)}
+                </h1>
 
-            <p className="text-lg sm:text-xl text-slate-300 mb-10 max-w-2xl leading-relaxed">
-              {t('hero.description')}
-            </p>
+                <p className="text-lg sm:text-xl text-slate-300 mb-10 max-w-2xl leading-relaxed">
+                  {slides[currentSlide]?.description}
+                </p>
+              </motion.div>
+            </AnimatePresence>
+          </div>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-14">
               <a
@@ -143,9 +162,6 @@ export function Hero() {
                 {t('hero.cta.discoverServices')}
               </a>
             </div>
-
-
-          </motion.div>
 
 
         </div>

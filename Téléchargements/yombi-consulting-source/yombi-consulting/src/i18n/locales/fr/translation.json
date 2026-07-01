@@ -27,7 +27,39 @@
       "clients": "Clients accompagnés",
       "experience": "Années d'expérience",
       "domains": "Domaines juridiques"
-    }
+    },
+    "slides": [
+      {
+        "badge": "CONSEIL JURIDIQUE STRATÉGIQUE",
+        "title": "Votre partenaire juridique de confiance",
+        "titleHighlight": "de confiance",
+        "description": "Un accompagnement sur mesure pour sécuriser vos décisions et développer vos activités en toute sérénité."
+      },
+      {
+        "badge": "DROIT DES AFFAIRES & CONTRATS",
+        "title": "Des contrats solides pour des partenariats durables",
+        "titleHighlight": "partenariats durables",
+        "description": "Rédaction, négociation et gestion de vos contrats commerciaux nationaux et internationaux avec une rigueur juridique exemplaire."
+      },
+      {
+        "badge": "ARBITRAGE & MÉDIATION",
+        "title": "Résolvez vos litiges avec efficacité et discrétion",
+        "titleHighlight": "efficacité et discrétion",
+        "description": "Solutions alternatives de résolution de conflits pour entreprises et organisations, adaptées aux enjeux transfrontaliers."
+      },
+      {
+        "badge": "CONFORMITÉ & AUDIT",
+        "title": "Maîtrisez vos risques juridiques et réglementaires",
+        "titleHighlight": "risques juridiques",
+        "description": "Audit complet de conformité et accompagnement dans la mise en conformité avec les réglementations locales et internationales."
+      },
+      {
+        "badge": "FORMATION & ACCOMPAGNEMENT",
+        "title": "Renforcez les compétences juridiques de vos équipes",
+        "titleHighlight": "vos équipes",
+        "description": "Sessions de formation sur mesure pour sensibiliser et outiller vos collaborateurs face aux enjeux juridiques de votre secteur."
+      }
+    ]
   },
   "about": {
     "badge": "À PROPOS DE NOUS",

@@ -27,7 +27,39 @@
       "clients": "Clients Served",
       "experience": "Years Experience",
       "domains": "Legal Domains"
-    }
+    },
+    "slides": [
+      {
+        "badge": "STRATEGIC LEGAL COUNSEL",
+        "title": "Your trusted legal partner",
+        "titleHighlight": "trusted",
+        "description": "Tailored support to secure your decisions and grow your business with complete peace of mind."
+      },
+      {
+        "badge": "BUSINESS LAW & CONTRACTS",
+        "title": "Solid contracts for lasting partnerships",
+        "titleHighlight": "lasting partnerships",
+        "description": "Drafting, negotiation and management of your national and international commercial contracts with exemplary legal rigor."
+      },
+      {
+        "badge": "ARBITRATION & MEDIATION",
+        "title": "Resolve your disputes with efficiency and discretion",
+        "titleHighlight": "efficiency and discretion",
+        "description": "Alternative dispute resolution solutions for businesses and organizations, adapted to cross-border challenges."
+      },
+      {
+        "badge": "COMPLIANCE & AUDIT",
+        "title": "Master your legal and regulatory risks",
+        "titleHighlight": "regulatory risks",
+        "description": "Complete compliance audit and support to align with local and international regulations."
+      },
+      {
+        "badge": "TRAINING & SUPPORT",
+        "title": "Strengthen your team's legal expertise",
+        "titleHighlight": "legal expertise",
+        "description": "Tailored training sessions to educate and equip your teams on the legal challenges of your industry."
+      }
+    ]
   },
   "about": {
     "badge": "ABOUT US",
