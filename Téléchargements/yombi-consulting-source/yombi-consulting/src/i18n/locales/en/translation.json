@@ -1,0 +1,366 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "team": "Team",
+    "publications": "Publications",
+    "contact": "Contact",
+    "bookAppointment": "Book Appointment",
+    "companyName": "Yombi Consulting",
+    "tagline": "LEGAL & STRATEGY"
+  },
+  "hero": {
+    "badge": "INTERNATIONAL LEGAL CONSULTING",
+    "title": "Your Strategic Legal Partner",
+    "titleHighlight": "Legal Partner",
+    "description": "Excellence in legal counsel for individuals, businesses and organizations. Expertise in business law, international arbitration and regulatory compliance.",
+    "quote": "Don't let your way of making a living corrupt your reason for living.",
+    "quoteAuthor": "Dr. Yombi Rothence Parfait",
+    "founderName": "Dr. Yombi Rothence Parfait",
+    "founderRole": "LEGAL CONSULTANT",
+    "cta": {
+      "discoverServices": "Explore our services",
+      "contactUs": "Book Appointment"
+    },
+    "stats": {
+      "clients": "Clients Served",
+      "experience": "Years Experience",
+      "domains": "Legal Domains"
+    }
+  },
+  "about": {
+    "badge": "ABOUT US",
+    "title": "Legal Expertise in Service of Your Interests",
+    "description": "Yombi Consulting is an online and in-person legal consulting firm specializing in strategic counsel, business law and international support. Founded by Dr. Yombi Rothence Parfait, the firm delivers high-quality legal services.",
+    "description2": "Our approach combines legal rigor, deep knowledge of comparative law systems and practical expertise to provide our clients with solutions tailored to their specific needs.",
+    "stats": {
+      "experience": "years of experience",
+      "clients": "satisfied clients",
+      "countries": "countries covered"
+    },
+    "modes": {
+      "online": "Online Consultation",
+      "inPerson": "In-Person Consultation"
+    },
+    "founder": {
+      "name": "Dr. Yombi Rothence Parfait",
+      "role": "FOUNDER — YOMBI CONSULTING"
+    },
+    "photoBadge": {
+      "value": "500+",
+      "label": "SATISFIED CLIENTS"
+    },
+    "cta": "Discuss your case",
+    "experience": {
+      "label": "Years of experience",
+      "extra": "serving the law"
+    }
+  },
+  "services": {
+    "badge": "OUR SERVICES",
+    "title": "Comprehensive Legal Solutions",
+    "description": "We offer a complete range of legal services for individuals, businesses and international organizations.",
+    "items": [
+      {
+        "title": "Strategic Legal Counsel",
+        "description": "High-level advice for individuals, businesses and international organizations."
+      },
+      {
+        "title": "Business Law",
+        "description": "Creation, structuring and legal management of national and international companies."
+      },
+      {
+        "title": "Contract Drafting",
+        "description": "Drafting, analysis and negotiation of commercial contracts and international partnerships."
+      },
+      {
+        "title": "International Arbitration",
+        "description": "Resolution of commercial disputes between companies from different countries."
+      },
+      {
+        "title": "Legal Mediation",
+        "description": "Management and amicable resolution of complex disputes without court proceedings."
+      },
+      {
+        "title": "Audit & Compliance",
+        "description": "Complete analysis of corporate compliance with local and international laws."
+      },
+      {
+        "title": "Mergers & Acquisitions",
+        "description": "Legal support for buying, selling or merging companies."
+      },
+      {
+        "title": "Risk Management",
+        "description": "Identification, prevention and management of legal risks for organizations."
+      },
+      {
+        "title": "Legal Training",
+        "description": "Training and awareness sessions on legal matters for teams and executives."
+      },
+      {
+        "title": "Investment Protection",
+        "description": "Legal security for national and international investments."
+      },
+      {
+        "title": "Labor Law",
+        "description": "Advice and support on labor law and workplace relations."
+      },
+      {
+        "title": "Civil & Patrimonial Law",
+        "description": "Advice on civil law as well as estate and asset protection."
+      }
+    ]
+  },
+  "whyChooseUs": {
+    "badge": "WHY CHOOSE US",
+    "title": "Legal Excellence at Your Service",
+    "description": "Discover what makes Yombi Consulting the preferred legal partner for our clients.",
+    "reasons": [
+      {
+        "title": "International Expertise",
+        "description": "Mastery of comparative law and legal systems of many countries."
+      },
+      {
+        "title": "Personalized Approach",
+        "description": "Each case is handled with care and particular attention to your needs."
+      },
+      {
+        "title": "Guaranteed Confidentiality",
+        "description": "Strict professional secrecy and data confidentiality."
+      },
+      {
+        "title": "Availability & Responsiveness",
+        "description": "Fast online consultation, responses within 24 hours."
+      }
+    ],
+    "banner": {
+      "title": "Ready to work with us?",
+      "description": "Contact us now to discuss your case. Our team responds within 24h.",
+      "phone": "+1 234 450 3415",
+      "whatsapp": "WhatsApp",
+      "writeUs": "Write to us",
+      "footer": "Available Monday to Saturday • Response guaranteed within 24h"
+    }
+  },
+  "team": {
+    "badge": "OUR TEAM",
+    "title": "Leadership & Expertise",
+    "members": [
+      {
+        "name": "Dr. Yombi Rothence Parfait",
+        "role": "FOUNDER & PRINCIPAL LEGAL CONSULTANT",
+        "bio": "Doctor of Law, specialized in international business law, arbitration, strategic counsel, conflict management, border governance and migration. Extensive multidisciplinary experience with companies, institutions and international organizations. Office located in Libreville, Malibé 2.",
+        "tags": ["International Law", "Arbitration", "M&A", "Compliance", "Business Law", "Conflict Management", "Border Governance", "Migration"]
+      },
+      {
+        "name": "Ovono Zouga Stella Marlyse",
+        "role": "DEPUTY DIRECTOR & ENGLISH-FRENCH INTERPRETER",
+        "bio": "Deputy Director of Yombi Consulting, Ovono Zouga Stella Marlyse ensures the operational and strategic coordination of the firm.",
+        "tags": []
+      }
+    ]
+  },
+  "publications": {
+    "badge": "PUBLICATIONS",
+    "title": "Books & Publications",
+    "description": "Explore the works of Dr. Yombi Rothence Parfait — spanning law, politics, culture and human development.",
+    "books": [
+      {
+        "title": "The Throne and Madness",
+        "category": "POLITICS & GOVERNANCE",
+        "subtitle": "Anatomy of Power in Africa"
+      },
+      {
+        "title": "The Tumultuous Life of Rodrigue",
+        "category": "NOVEL & TESTIMONY",
+        "subtitle": "A story of hope, forgiveness and rebirth"
+      },
+      {
+        "title": "Iboga, A Revealing Spirit",
+        "category": "CULTURE & TRADITIONS",
+        "subtitle": "Sacred plant of the Gabonese forests"
+      },
+      {
+        "title": "A Gabon Facing Tomorrow",
+        "category": "GEOPOLITICS & DEVELOPMENT",
+        "subtitle": "History, challenges and reconstruction perspectives"
+      },
+      {
+        "title": "Become a Good Leader",
+        "category": "LEADERSHIP & MANAGEMENT",
+        "subtitle": "Keys to transformational leadership"
+      }
+    ]
+  },
+  "humanitarian": {
+    "badge": "HUMANITARIAN ACTION",
+    "title": "Give, Change a Life",
+    "quote": "Because justice does not stop at the courtroom door — every gift is an act of humanity. Join us in bringing light, care and hope to orphans and the sick around the world.",
+    "causes": [
+      {
+        "title": "Support for Orphans",
+        "description": "Providing education, food and care to abandoned children around the world."
+      },
+      {
+        "title": "Help for the Sick",
+        "description": "Funding medical care for the most vulnerable who lack access to treatment."
+      }
+    ],
+    "amountLabel": "Choose your amount",
+    "amountSub": "Starting from $10 — every dollar counts",
+    "customPlaceholder": "Other amount (min. $10)",
+    "donateButton": "Donate",
+    "secure": "Secure payment — 100% of funds go to beneficiaries"
+  },
+  "testimonials": {
+    "badge": "TESTIMONIALS",
+    "title": "What Our Clients Say",
+    "description": "Our clients' satisfaction is our greatest pride.",
+    "items": [
+      {
+        "name": "Jean-Michel K.",
+        "role": "Entrepreneur",
+        "quote": "Yombi Consulting supported me in setting up my business with remarkable professionalism. I highly recommend their services."
+      }
+    ],
+    "cta": {
+      "text": "Join our satisfied clients and bring your projects to life.",
+      "button": "Contact us"
+    },
+    "controls": {
+      "prev": "Previous testimonial",
+      "next": "Next testimonial"
+    }
+  },
+  "contact": {
+    "badge": "APPOINTMENT",
+    "title": "Book Your Appointment",
+    "description": "Our team is available to review your legal situation and support you.",
+    "infoTitle": "Contact Information",
+    "consultationFee": {
+      "label": "Consultation Fee",
+      "value": "$50 USD"
+    },
+    "office": {
+      "title": "Our Office",
+      "address": "Malibé 2",
+      "city": "Libreville, Gabon"
+    },
+    "phone": {
+      "title": "Phone",
+      "number": "+1 234 450 3415"
+    },
+    "whatsapp": {
+      "title": "WhatsApp",
+      "number": "+1 234 450 3415"
+    },
+    "email": {
+      "title": "Email",
+      "address1": "yombirothence@gmail.com"
+    },
+    "hours": {
+      "title": "Availability",
+      "weekdays": "Monday - Saturday",
+      "weekdaysHours": "Response within 24h",
+      "saturday": "Sunday",
+      "saturdayHours": "Closed"
+    },
+    "form": {
+      "firstName": "Full Name",
+      "firstNamePlaceholder": "Your name",
+      "email": "Email",
+      "emailPlaceholder": "you@example.com",
+      "phone": "Phone (WhatsApp)",
+      "phonePlaceholder": "+xxx xx xx xx xx",
+      "service": "Select a service",
+      "serviceOptions": [
+        "Strategic Legal Counsel",
+        "Business Law",
+        "Contract Drafting",
+        "International Arbitration",
+        "Legal Mediation",
+        "Audit & Compliance",
+        "Mergers & Acquisitions",
+        "Risk Management",
+        "Legal Training",
+        "Investment Protection",
+        "Labor Law",
+        "Civil & Patrimonial Law",
+        "Other request"
+      ],
+      "message": "Describe your legal situation",
+      "messagePlaceholder": "Briefly describe your situation...",
+      "submit": "Send my request",
+      "sending": "Sending...",
+      "success": "Request sent!"
+    }
+  },
+  "chatbot": {
+    "welcome": "👋 Hello! I'm Yombi Consulting's virtual assistant. How can I help you? Ask a question or pick one of the suggestions below.",
+    "header": "Yombi Consulting",
+    "subheader": "Virtual assistant",
+    "inputPlaceholder": "Type your message...",
+    "inputPlaceholderForm": "Reply to the form above...",
+    "faqs": [
+      {
+        "question": "What are your services?",
+        "answer": "Yombi Consulting offers a full range of legal services:\n\n⚖️ **Strategic Legal Counsel** — for individuals, businesses and international organizations.\n\n🏢 **Business Law** — company creation and legal management.\n\n📄 **Contract Drafting** — commercial contracts and international partnerships.\n\n🌍 **International Arbitration** — resolution of commercial disputes.\n\n🤝 **Legal Mediation**, **Audit & Compliance**, **Mergers & Acquisitions**, **Risk Management**, plus Legal Training, Labor Law and Civil & Patrimonial Law.\n\nWould you like more details on any of these services?"
+      },
+      {
+        "question": "How much does a consultation cost?",
+        "answer": "The initial consultation fee is **$50 USD**. Pricing for full engagements is then set on a quote basis, after review of your case."
+      },
+      {
+        "question": "Where are you located?",
+        "answer": "Our office is located in **Libreville, Malibé 2, Gabon**. We support both local and international clients, online or in person."
+      },
+      {
+        "question": "How can I contact you?",
+        "answer": "You can reach us via:\n\n📧 **Email**: yombirothence@gmail.com\n💬 **WhatsApp**: +1 234 450 3415\n📞 **Phone**: +1 234 450 3415\n\nOr book directly through the appointment form on our site — we respond within 24h, Monday to Saturday."
+      },
+      {
+        "question": "Who is Dr. Yombi Rothence Parfait?",
+        "answer": "Dr. Yombi Rothence Parfait is the **Founder and Principal Legal Consultant** of Yombi Consulting. A Doctor of Law, he specializes in international business law, arbitration, strategic counsel, conflict management, border governance and migration. He is also the author of several books on law, politics, culture and human development."
+      }
+    ],
+    "quickReplies": [
+      "What are your services?",
+      "How much does a consultation cost?",
+      "Where are you located?",
+      "How can I contact you?"
+    ],
+    "noAnswer": "I couldn't find an answer to your question. You can leave your details below so our team can respond directly by email.",
+    "form": {
+      "name": "Your name *",
+      "email": "Your email *",
+      "phone": "Your phone (optional)",
+      "send": "Send",
+      "cancel": "Cancel",
+      "sending": "Sending...",
+      "success": "Message sent successfully!"
+    },
+    "formSuccess": "✅ Thank you! Your message has been sent to our team. We will respond as soon as possible.",
+    "formCancel": "No problem. You can also reach us via WhatsApp at **+1 234 450 3415** or through the contact form on our site.",
+    "error": {
+      "general": "An error occurred. Please try again or contact us directly.",
+      "connection": "Connection issue. Please try again."
+    }
+  },
+  "footer": {
+    "description": "Your strategic legal partner for individuals, businesses and international organizations.",
+    "quickLinks": "Quick Links",
+    "services": "Services",
+    "serviceItems": ["Legal Counsel", "Business Law", "International Arbitration", "Legal Mediation", "Audit & Compliance", "Legal Training"],
+    "contactTitle": "Contact",
+    "legal": {
+      "notice": "Legal Notice",
+      "privacy": "Privacy Policy"
+    },
+    "copyright": "Yombi Consulting. All rights reserved."
+  },
+  "language": {
+    "fr": "Français",
+    "en": "English"
+  }
+}

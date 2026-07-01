@@ -1,0 +1,366 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "about": "À Propos",
+    "services": "Services",
+    "team": "Équipe",
+    "publications": "Publications",
+    "contact": "Contact",
+    "bookAppointment": "Prendre Rendez-vous",
+    "companyName": "Yombi Consulting",
+    "tagline": "JURIDIQUE & STRATÉGIE"
+  },
+  "hero": {
+    "badge": "CONSEIL JURIDIQUE INTERNATIONAL",
+    "title": "Votre partenaire juridique stratégique",
+    "titleHighlight": "partenaire juridique",
+    "description": "Excellence en conseil juridique pour particuliers, entreprises et organisations. Expertise en droit des affaires, arbitrage international et conformité réglementaire.",
+    "quote": "Ne laisse pas ton moyen de vivre corrompre ta raison de vivre.",
+    "quoteAuthor": "Dr Yombi Rothence Parfait",
+    "founderName": "Dr. Yombi Rothence Parfait",
+    "founderRole": "CONSULTANT JURIDIQUE",
+    "cta": {
+      "discoverServices": "Découvrir nos services",
+      "contactUs": "Prendre rendez-vous"
+    },
+    "stats": {
+      "clients": "Clients accompagnés",
+      "experience": "Années d'expérience",
+      "domains": "Domaines juridiques"
+    }
+  },
+  "about": {
+    "badge": "À PROPOS DE NOUS",
+    "title": "L'excellence juridique au service de vos intérêts",
+    "description": "Yombi Consulting est un cabinet de conseil juridique en ligne et en présentiel, spécialisé dans le conseil stratégique, le droit des affaires et l'accompagnement international. Fondé par le Dr Yombi Rothence Parfait, le cabinet propose des services juridiques de haute qualité.",
+    "description2": "Notre approche combine rigueur juridique, connaissance approfondie des systèmes de droit comparé et expertise pratique pour offrir à nos clients des solutions adaptées à leurs besoins spécifiques.",
+    "stats": {
+      "experience": "années d'expérience",
+      "clients": "clients satisfaits",
+      "countries": "pays couverts"
+    },
+    "modes": {
+      "online": "Consultation en ligne",
+      "inPerson": "Consultation en présentiel"
+    },
+    "founder": {
+      "name": "Dr. Yombi Rothence Parfait",
+      "role": "FONDATEUR — YOMBI CONSULTING"
+    },
+    "photoBadge": {
+      "value": "500+",
+      "label": "CLIENTS SATISFAITS"
+    },
+    "cta": "Discuter de votre dossier",
+    "experience": {
+      "label": "Années d'expérience",
+      "extra": "au service du droit"
+    }
+  },
+  "services": {
+    "badge": "NOS SERVICES",
+    "title": "Des solutions juridiques complètes",
+    "description": "Nous offrons une gamme complète de services juridiques pour particuliers, entreprises et organisations internationales.",
+    "items": [
+      {
+        "title": "Conseil Juridique Stratégique",
+        "description": "Conseils de haut niveau pour particuliers, entreprises et organisations internationales."
+      },
+      {
+        "title": "Droit des Affaires",
+        "description": "Création, structuration et gestion juridique d'entreprises nationales et internationales."
+      },
+      {
+        "title": "Rédaction de Contrats",
+        "description": "Rédaction, analyse et négociation de contrats commerciaux et de partenariats internationaux."
+      },
+      {
+        "title": "Arbitrage International",
+        "description": "Résolution de litiges commerciaux entre entreprises de pays différents."
+      },
+      {
+        "title": "Médiation Juridique",
+        "description": "Gestion et résolution amiable de litiges complexes sans procédure judiciaire."
+      },
+      {
+        "title": "Audit & Conformité",
+        "description": "Analyse complète de la conformité des entreprises aux réglementations locales et internationales."
+      },
+      {
+        "title": "Fusions & Acquisitions",
+        "description": "Accompagnement juridique pour l'achat, la vente ou la fusion d'entreprises."
+      },
+      {
+        "title": "Gestion des Risques",
+        "description": "Identification, prévention et gestion des risques juridiques pour les organisations."
+      },
+      {
+        "title": "Formation Juridique",
+        "description": "Sessions de formation et de sensibilisation juridique pour équipes et dirigeants."
+      },
+      {
+        "title": "Protection des Investissements",
+        "description": "Sécurisation juridique des investissements nationaux et internationaux."
+      },
+      {
+        "title": "Droit du Travail",
+        "description": "Conseil et accompagnement en droit du travail et relations sociales."
+      },
+      {
+        "title": "Droit Civil & Patrimonial",
+        "description": "Conseil en droit civil ainsi qu'en gestion et protection du patrimoine."
+      }
+    ]
+  },
+  "whyChooseUs": {
+    "badge": "POURQUOI NOUS CHOISIR",
+    "title": "L'excellence juridique à votre service",
+    "description": "Découvrez ce qui fait de Yombi Consulting le partenaire juridique privilégié de nos clients.",
+    "reasons": [
+      {
+        "title": "Expertise Internationale",
+        "description": "Maîtrise du droit comparé et des systèmes juridiques de nombreux pays."
+      },
+      {
+        "title": "Approche Personnalisée",
+        "description": "Chaque dossier est traité avec soin et une attention particulière à vos besoins."
+      },
+      {
+        "title": "Confidentialité Garantie",
+        "description": "Secret professionnel strict et confidentialité des données."
+      },
+      {
+        "title": "Disponibilité & Réactivité",
+        "description": "Consultation en ligne rapide, réponse sous 24 heures."
+      }
+    ],
+    "banner": {
+      "title": "Prêt à travailler avec nous ?",
+      "description": "Contactez-nous dès maintenant pour discuter de votre dossier. Notre équipe vous répond sous 24h.",
+      "phone": "+1 234 450 3415",
+      "whatsapp": "WhatsApp",
+      "writeUs": "Nous écrire",
+      "footer": "Disponible du Lundi au Samedi • Réponse garantie sous 24h"
+    }
+  },
+  "team": {
+    "badge": "NOTRE ÉQUIPE",
+    "title": "Direction & Expertise",
+    "members": [
+      {
+        "name": "Dr. Yombi Rothence Parfait",
+        "role": "FONDATEUR & CONSULTANT JURIDIQUE PRINCIPAL",
+        "bio": "Docteur en droit, spécialisé en droit des affaires international, arbitrage, conseil stratégique, gestion des conflits, gouvernance des frontières et migration. Vaste expérience pluridisciplinaire auprès d'entreprises, d'institutions et d'organisations internationales. Bureau situé à Libreville, Malibé 2.",
+        "tags": ["Droit International", "Arbitrage", "M&A", "Compliance", "Droit des Affaires", "Gestion des Conflits", "Gouvernance des Frontières", "Migration"]
+      },
+      {
+        "name": "Ovono Zouga Stella Marlyse",
+        "role": "DIRECTRICE ADJOINTE & INTERPRÈTE ANGLAIS-FRANÇAIS",
+        "bio": "Directrice adjointe de Yombi Consulting, Ovono Zouga Stella Marlyse assure la coordination opérationnelle et stratégique du cabinet.",
+        "tags": []
+      }
+    ]
+  },
+  "publications": {
+    "badge": "PUBLICATIONS",
+    "title": "Livres & Publications",
+    "description": "Découvrez les ouvrages du Dr Yombi Rothence Parfait — droit, politique, culture et développement humain.",
+    "books": [
+      {
+        "title": "Le Trône et la Folie",
+        "category": "POLITIQUE & GOUVERNANCE",
+        "subtitle": "Anatomie du pouvoir en Afrique"
+      },
+      {
+        "title": "La Vie Tumultueuse de Rodrigue",
+        "category": "ROMAN & TÉMOIGNAGE",
+        "subtitle": "Une histoire d'espoir, de pardon et de renaissance"
+      },
+      {
+        "title": "Iboga, Un Esprit Révélateur",
+        "category": "CULTURE & TRADITIONS",
+        "subtitle": "Plante sacrée des forêts gabonaises"
+      },
+      {
+        "title": "Un Gabon Tourné vers Demain",
+        "category": "GÉOPOLITIQUE & DÉVELOPPEMENT",
+        "subtitle": "Histoire, défis et perspectives de reconstruction"
+      },
+      {
+        "title": "Deviens un Bon Leader",
+        "category": "LEADERSHIP & MANAGEMENT",
+        "subtitle": "Les clés du leadership transformationnel"
+      }
+    ]
+  },
+  "humanitarian": {
+    "badge": "ACTION HUMANITAIRE",
+    "title": "Donnez, Changez une Vie",
+    "quote": "Parce que la justice ne s'arrête pas aux prétoires — chaque don est un acte d'humanité. Rejoignez-nous pour apporter lumière, soins et espoir aux orphelins et aux malades à travers le monde.",
+    "causes": [
+      {
+        "title": "Soutien aux Orphelins",
+        "description": "Offrir éducation, nourriture et affection aux enfants abandonnés partout dans le monde."
+      },
+      {
+        "title": "Aide aux Malades",
+        "description": "Financer des soins médicaux pour les plus vulnérables qui n'ont pas accès aux traitements."
+      }
+    ],
+    "amountLabel": "Choisissez votre montant",
+    "amountSub": "À partir de $10 — chaque dollar compte",
+    "customPlaceholder": "Autre montant (min. $10)",
+    "donateButton": "Faire un don de",
+    "secure": "Paiement sécurisé — 100% des fonds sont reversés aux bénéficiaires"
+  },
+  "testimonials": {
+    "badge": "TÉMOIGNAGES",
+    "title": "Ce que Disent Nos Clients",
+    "description": "La satisfaction de nos clients est notre meilleure fierté.",
+    "items": [
+      {
+        "name": "Jean-Michel K.",
+        "role": "Entrepreneur",
+        "quote": "Yombi Consulting m'a accompagné dans la création de mon entreprise avec un professionnalisme remarquable. Je recommande vivement leurs services."
+      }
+    ],
+    "cta": {
+      "text": "Rejoignez nos clients satisfaits et donnez vie à vos projets.",
+      "button": "Contactez-nous"
+    },
+    "controls": {
+      "prev": "Témoignage précédent",
+      "next": "Témoignage suivant"
+    }
+  },
+  "contact": {
+    "badge": "RENDEZ-VOUS",
+    "title": "Prenez Rendez-vous",
+    "description": "Notre équipe est à votre disposition pour étudier votre situation juridique et vous accompagner.",
+    "infoTitle": "Informations de contact",
+    "consultationFee": {
+      "label": "Frais de consultation",
+      "value": "$50 USD"
+    },
+    "office": {
+      "title": "Notre Bureau",
+      "address": "Malibé 2",
+      "city": "Libreville, Gabon"
+    },
+    "phone": {
+      "title": "Téléphone",
+      "number": "+1 234 450 3415"
+    },
+    "whatsapp": {
+      "title": "WhatsApp",
+      "number": "+1 234 450 3415"
+    },
+    "email": {
+      "title": "Email",
+      "address1": "yombirothence@gmail.com"
+    },
+    "hours": {
+      "title": "Disponibilité",
+      "weekdays": "Lundi - Samedi",
+      "weekdaysHours": "Réponse sous 24h",
+      "saturday": "Dimanche",
+      "saturdayHours": "Fermé"
+    },
+    "form": {
+      "firstName": "Nom complet",
+      "firstNamePlaceholder": "Votre nom",
+      "email": "Email",
+      "emailPlaceholder": "vous@exemple.com",
+      "phone": "Téléphone (WhatsApp)",
+      "phonePlaceholder": "+xxx xx xx xx xx",
+      "service": "Sélectionner un service",
+      "serviceOptions": [
+        "Conseil Juridique Stratégique",
+        "Droit des Affaires",
+        "Rédaction de Contrats",
+        "Arbitrage International",
+        "Médiation Juridique",
+        "Audit & Conformité",
+        "Fusions & Acquisitions",
+        "Gestion des Risques",
+        "Formation Juridique",
+        "Protection des Investissements",
+        "Droit du Travail",
+        "Droit Civil & Patrimonial",
+        "Autre demande"
+      ],
+      "message": "Décrivez votre situation juridique",
+      "messagePlaceholder": "Décrivez brièvement votre situation...",
+      "submit": "Envoyer ma demande",
+      "sending": "Envoi en cours...",
+      "success": "Demande envoyée !"
+    }
+  },
+  "chatbot": {
+    "welcome": "👋 Bonjour ! Je suis l'assistant virtuel de Yombi Consulting. Comment puis-je vous aider ? Posez-moi une question ou choisissez parmi les suggestions ci-dessous.",
+    "header": "Yombi Consulting",
+    "subheader": "Assistant virtuel",
+    "inputPlaceholder": "Écrivez votre message...",
+    "inputPlaceholderForm": "Répondez au formulaire ci-dessus...",
+    "faqs": [
+      {
+        "question": "Quels sont vos services ?",
+        "answer": "Yombi Consulting propose une gamme complète de services juridiques :\n\n⚖️ **Conseil Juridique Stratégique** — pour particuliers, entreprises et organisations internationales.\n\n🏢 **Droit des Affaires** — création et gestion juridique d'entreprises.\n\n📄 **Rédaction de Contrats** — commerciaux et partenariats internationaux.\n\n🌍 **Arbitrage International** — résolution de litiges commerciaux.\n\n🤝 **Médiation Juridique**, **Audit & Conformité**, **Fusions & Acquisitions**, **Gestion des Risques**, ainsi que Formation Juridique, Droit du Travail et Droit Civil & Patrimonial.\n\nSouhaitez-vous plus de détails sur l'un de ces services ?"
+      },
+      {
+        "question": "Combien coûte une consultation ?",
+        "answer": "Les frais de consultation initiale s'élèvent à **50 $ USD**. Le tarif des prestations complètes est ensuite établi sur devis, après étude de votre dossier."
+      },
+      {
+        "question": "Où êtes-vous situés ?",
+        "answer": "Notre bureau est situé à **Libreville, Malibé 2, au Gabon**. Nous accompagnons aussi bien les clients locaux que les clients internationaux, en ligne ou en présentiel."
+      },
+      {
+        "question": "Comment vous contacter ?",
+        "answer": "Vous pouvez nous contacter par :\n\n📧 **Email** : yombirothence@gmail.com\n💬 **WhatsApp** : +1 234 450 3415\n📞 **Téléphone** : +1 234 450 3415\n\nOu prendre rendez-vous directement via le formulaire sur notre site — nous répondons sous 24h, du lundi au samedi."
+      },
+      {
+        "question": "Qui est le Dr Yombi Rothence Parfait ?",
+        "answer": "Le Dr Yombi Rothence Parfait est le **Fondateur et Consultant Juridique Principal** de Yombi Consulting. Docteur en droit, il est spécialisé en droit des affaires international, arbitrage, conseil stratégique, gestion des conflits, gouvernance des frontières et migration. Il est également auteur de plusieurs ouvrages sur le droit, la politique, la culture et le développement humain."
+      }
+    ],
+    "quickReplies": [
+      "Quels sont vos services ?",
+      "Combien coûte une consultation ?",
+      "Où êtes-vous situés ?",
+      "Comment vous contacter ?"
+    ],
+    "noAnswer": "Je n'ai pas trouvé de réponse à votre question. Vous pouvez laisser vos coordonnées ci-dessous pour que notre équipe vous réponde directement par email.",
+    "form": {
+      "name": "Votre nom *",
+      "email": "Votre email *",
+      "phone": "Votre téléphone (optionnel)",
+      "send": "Envoyer",
+      "cancel": "Annuler",
+      "sending": "Envoi...",
+      "success": "Message envoyé avec succès !"
+    },
+    "formSuccess": "✅ Merci ! Votre message a bien été transmis à notre équipe. Nous vous répondrons dans les plus brefs délais.",
+    "formCancel": "Pas de problème. Vous pouvez également nous contacter par WhatsApp au **+1 234 450 3415** ou via le formulaire de contact sur notre site.",
+    "error": {
+      "general": "Une erreur est survenue. Veuillez réessayer ou nous contacter directement.",
+      "connection": "Problème de connexion. Veuillez réessayer."
+    }
+  },
+  "footer": {
+    "description": "Votre partenaire juridique stratégique pour les particuliers, entreprises et organisations internationales.",
+    "quickLinks": "Liens Utiles",
+    "services": "Services",
+    "serviceItems": ["Conseil Juridique", "Droit des Affaires", "Arbitrage International", "Médiation Juridique", "Audit & Conformité", "Formation Juridique"],
+    "contactTitle": "Contact",
+    "legal": {
+      "notice": "Mentions Légales",
+      "privacy": "Confidentialité"
+    },
+    "copyright": "Yombi Consulting. Tous droits réservés."
+  },
+  "language": {
+    "fr": "Français",
+    "en": "English"
+  }
+}
