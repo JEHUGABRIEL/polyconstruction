@@ -11,6 +11,8 @@ interface Cause {
 const amounts = [10, 25, 50, 100, 250];
 const causeIcons = [Smile, Building2];
 
+// Section humanitaire : sélecteur de montant de don avec boutons prédéfinis + champ personnalisé
+// Le montant sélectionné est affiché dynamiquement dans le bouton de don
 export function Humanitarian() {
   const { t } = useTranslation();
   const causes = t('humanitarian.causes', { returnObjects: true }) as Cause[];

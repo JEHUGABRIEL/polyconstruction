@@ -1,7 +1,10 @@
 import { useTranslation } from 'react-i18next';
 
+// Bascule entre le français et l'anglais en changeant la langue i18n active
+// Le drapeau et le code affiché correspondent toujours à la langue cible (celle vers laquelle on va)
 export function LanguageSwitcher() {
   const { i18n } = useTranslation();
+  // Détection de la langue actuelle : on prend 'en' si elle commence par 'en' (ex: en-US), sinon 'fr'
   const currentLang = i18n.language?.startsWith('en') ? 'en' : 'fr';
 
   const toggleLanguage = () => {

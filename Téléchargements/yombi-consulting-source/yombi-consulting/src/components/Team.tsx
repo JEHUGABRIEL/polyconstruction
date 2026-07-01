@@ -10,6 +10,9 @@ interface Member {
   tags: string[];
 }
 
+// Section Équipe : affiche les membres sous forme de cartes en grille 2 colonnes
+// Chaque carte contient une photo (avec zoom au survol), le nom, le rôle, la bio et des tags
+// La première carte utilise la photo du fondateur, la seconde celle de Stella Marlyse
 export function Team() {
   const { t } = useTranslation();
   const members = t('team.members', { returnObjects: true }) as Member[];

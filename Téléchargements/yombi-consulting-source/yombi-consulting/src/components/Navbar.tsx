@@ -49,7 +49,7 @@ export function Navbar() {
         <div className="flex justify-between items-center">
           <a href="#accueil" className="flex items-center gap-2.5">
             <img src={logo} alt={t('nav.companyName')} className="h-9 w-9 rounded-full object-cover" />
-            <span className="flex flex-col leading-none">
+            <span className="hidden lg:flex flex-col leading-none">
               <span
                 className={`text-xl font-bold font-serif ${isScrolled ? 'text-blue-900' : 'text-white'}`}>
                 {t('nav.companyName')}

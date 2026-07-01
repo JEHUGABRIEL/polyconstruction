@@ -4,6 +4,8 @@ import { useTranslation } from 'react-i18next';
 import founderRobe from '../assets/founder-robe.png';
 import founderOfficeSmall from '../assets/founder-office-small.png';
 
+// Section À propos : mise en page en deux colonnes (photo à gauche, texte à droite)
+// La colonne image contient un effet de superposition : photo principale + vignette incrustée + badge statistique
 export function About() {
   const { t } = useTranslation();
 

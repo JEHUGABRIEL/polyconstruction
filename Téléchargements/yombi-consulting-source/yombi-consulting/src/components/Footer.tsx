@@ -2,6 +2,8 @@ import { MapPin, Mail, Phone, MessageCircle } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import logo from '../assets/logo-raw.png';
 
+// Pied de page en 4 colonnes : logo + description, services, liens rapides, coordonnées
+// Les données (services, liens, contacts) sont chargées depuis les traductions i18n
 export function Footer() {
   const { t } = useTranslation();
   const serviceItems = t('footer.serviceItems', { returnObjects: true }) as string[];
