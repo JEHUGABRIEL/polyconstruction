@@ -18,6 +18,10 @@ export function Navbar() {
     path: '/boutique'
   },
   {
+    name: 'Nos Réalisations',
+    path: '/realisations'
+  },
+  {
     name: 'Contact',
     path: '/contact'
   }];
