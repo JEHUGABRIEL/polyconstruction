@@ -16,12 +16,17 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="space-y-4">
-            <div className="flex items-center gap-3 bg-white p-2 rounded-md inline-block">
+            <div className="flex items-center gap-3">
               <img
                 src="/channels4_profile.jpg"
                 alt="Poly Construction Services Logo"
-                className="h-12 w-auto object-contain" />
-              
+                className="w-[60px] sm:w-[120px] aspect-square rounded-[50%] object-cover border-2 border-slate-700 flex-shrink-0" />
+              <div>
+                <h3 className="text-base sm:text-lg font-bold text-white leading-tight">
+                  Poly Construction<br />Services
+                </h3>
+                <p className="text-xs text-slate-500 mt-0.5">BTP &amp; Ingénierie</p>
+              </div>
             </div>
             <p className="text-sm mt-4 text-slate-400">
               Poly Construction Services est votre partenaire de confiance pour
@@ -57,7 +62,7 @@ export function Footer() {
           </div>
 
           {/* Quick Links */}
-          <div>
+          <div className="lg:pl-10">
             <h3 className="text-lg font-semibold text-white mb-4">
               Liens Rapides
             </h3>
