@@ -112,12 +112,14 @@ export function ProjectFormModal({ isOpen, onClose, onSave, editProject }: Props
               {/* Ligne 1 : Titre + Catégorie */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                  <label htmlFor="project-title" className="block text-sm font-medium text-slate-700 mb-1.5">
                     Titre du projet <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="text"
+                    id="project-title"
                     name="title"
+                    autoComplete="off"
                     value={form.title}
                     onChange={handleChange}
                     placeholder="ex: Construction Immeuble R+4"
@@ -126,12 +128,14 @@ export function ProjectFormModal({ isOpen, onClose, onSave, editProject }: Props
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                  <label htmlFor="project-category" className="block text-sm font-medium text-slate-700 mb-1.5">
                     Catégorie
                   </label>
                   <input
                     type="text"
+                    id="project-category"
                     name="category"
+                    autoComplete="off"
                     value={form.category}
                     onChange={handleChange}
                     placeholder="ex: Bâtiment, Rénovation..."
@@ -142,12 +146,14 @@ export function ProjectFormModal({ isOpen, onClose, onSave, editProject }: Props
 
               {/* Ligne 2 : Date */}
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                <label htmlFor="project-date" className="block text-sm font-medium text-slate-700 mb-1.5">
                   Année / Date
                 </label>
                 <input
                   type="text"
+                  id="project-date"
                   name="date"
+                  autoComplete="off"
                   value={form.date}
                   onChange={handleChange}
                   placeholder="ex: 2024"
@@ -157,7 +163,7 @@ export function ProjectFormModal({ isOpen, onClose, onSave, editProject }: Props
 
               {/* Ligne 3 : Image */}
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                <label htmlFor="project-image" className="block text-sm font-medium text-slate-700 mb-1.5">
                   URL de l'image
                 </label>
                 <div className="relative">
@@ -167,7 +173,9 @@ export function ProjectFormModal({ isOpen, onClose, onSave, editProject }: Props
                   />
                   <input
                     type="url"
+                    id="project-image"
                     name="image"
+                    autoComplete="url"
                     value={form.image}
                     onChange={handleChange}
                     placeholder="https://images.unsplash.com/..."
@@ -191,11 +199,13 @@ export function ProjectFormModal({ isOpen, onClose, onSave, editProject }: Props
 
               {/* Ligne 4 : Description */}
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                <label htmlFor="project-description" className="block text-sm font-medium text-slate-700 mb-1.5">
                   Description
                 </label>
                 <textarea
+                  id="project-description"
                   name="description"
+                  autoComplete="off"
                   value={form.description}
                   onChange={handleChange}
                   placeholder="Description du projet..."

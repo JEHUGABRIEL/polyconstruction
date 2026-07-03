@@ -138,6 +138,8 @@ export function Contact() {
                     <input
                       type="text"
                       id="firstName"
+                      name="firstName"
+                      autoComplete="given-name"
                       className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-colors"
                       placeholder="Votre prénom" />
                     
@@ -152,6 +154,8 @@ export function Contact() {
                     <input
                       type="text"
                       id="lastName"
+                      name="lastName"
+                      autoComplete="family-name"
                       className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-colors"
                       placeholder="Votre nom" />
                     
@@ -169,6 +173,8 @@ export function Contact() {
                     <input
                       type="email"
                       id="email"
+                      name="email"
+                      autoComplete="email"
                       className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-colors"
                       placeholder="votre@email.com" />
                     
@@ -183,6 +189,8 @@ export function Contact() {
                     <input
                       type="tel"
                       id="phone"
+                      name="phone"
+                      autoComplete="tel"
                       className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-colors"
                       placeholder="+236 XX XX XX XX" />
                     
@@ -198,6 +206,7 @@ export function Contact() {
                   </label>
                   <select
                     id="subject"
+                    name="subject"
                     className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-colors bg-white">
                     
                     <option>Demande de devis</option>
@@ -217,6 +226,8 @@ export function Contact() {
                   </label>
                   <textarea
                     id="message"
+                    name="message"
+                    autoComplete="off"
                     rows={5}
                     className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none transition-colors resize-none"
                     placeholder="Décrivez votre projet ou votre demande...">

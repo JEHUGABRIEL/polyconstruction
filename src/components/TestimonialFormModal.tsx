@@ -102,29 +102,32 @@ export function TestimonialFormModal({ isOpen, onClose, onSave, editTestimonial 
               className="overflow-y-auto p-6 flex-1 space-y-5"
             >
               {/* Ligne 1 : Nom */}
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1.5">
-                  Nom du client <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  name="name"
-                  value={form.name}
-                  onChange={handleChange}
-                  placeholder="ex: Jean-Paul M."
-                  required
-                  className="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none"
+              <div>                <label htmlFor="testimonial-name" className="block text-sm font-medium text-slate-700 mb-1.5">
+                    Nom du client <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="testimonial-name"
+                    name="name"
+                    autoComplete="off"
+                    value={form.name}
+                    onChange={handleChange}
+                    placeholder="ex: Jean-Paul M."
+                    required
+                    className="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none"
                 />
               </div>
 
               {/* Ligne 2 : Rôle */}
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                <label htmlFor="testimonial-role" className="block text-sm font-medium text-slate-700 mb-1.5">
                   Rôle / Fonction
                 </label>
                 <input
                   type="text"
+                  id="testimonial-role"
                   name="role"
+                  autoComplete="organization-title"
                   value={form.role}
                   onChange={handleChange}
                   placeholder="ex: Propriétaire, Directeur..."
@@ -134,10 +137,10 @@ export function TestimonialFormModal({ isOpen, onClose, onSave, editTestimonial 
 
               {/* Ligne 3 : Note */}
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">
+                <label id="testimonial-rating-label" className="block text-sm font-medium text-slate-700 mb-2">
                   Note
                 </label>
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-1" role="radiogroup" aria-labelledby="testimonial-rating-label">
                   {[1, 2, 3, 4, 5].map((star) => (
                     <button
                       key={star}
@@ -160,11 +163,13 @@ export function TestimonialFormModal({ isOpen, onClose, onSave, editTestimonial 
 
               {/* Ligne 4 : Contenu */}
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                <label htmlFor="testimonial-content" className="block text-sm font-medium text-slate-700 mb-1.5">
                   Témoignage <span className="text-red-500">*</span>
                 </label>
                 <textarea
+                  id="testimonial-content"
                   name="content"
+                  autoComplete="off"
                   value={form.content}
                   onChange={handleChange}
                   placeholder="Le témoignage du client..."

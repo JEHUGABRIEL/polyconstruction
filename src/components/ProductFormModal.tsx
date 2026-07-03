@@ -122,12 +122,14 @@ export function ProductFormModal({ isOpen, onClose, onSave, editProduct }: Props
               {/* Ligne 1 : Nom + Catégorie */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                  <label htmlFor="product-name" className="block text-sm font-medium text-slate-700 mb-1.5">
                     Nom du produit <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="text"
+                    id="product-name"
                     name="name"
+                    autoComplete="off"
                     value={form.name}
                     onChange={handleChange}
                     placeholder="ex: Ciment Portland"
@@ -136,12 +138,14 @@ export function ProductFormModal({ isOpen, onClose, onSave, editProduct }: Props
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                  <label htmlFor="product-category" className="block text-sm font-medium text-slate-700 mb-1.5">
                     Catégorie
                   </label>
                   <input
                     type="text"
+                    id="product-category"
                     name="category"
+                    autoComplete="off"
                     value={form.category}
                     onChange={handleChange}
                     placeholder="ex: Matériaux de base"
@@ -152,12 +156,14 @@ export function ProductFormModal({ isOpen, onClose, onSave, editProduct }: Props
 
               {/* Ligne 2 : Prix */}
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                <label htmlFor="product-price" className="block text-sm font-medium text-slate-700 mb-1.5">
                   Prix <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
+                  id="product-price"
                   name="price"
+                  autoComplete="off"
                   value={form.price}
                   onChange={handleChange}
                   placeholder="ex: 12 500 FCFA"
@@ -168,7 +174,7 @@ export function ProductFormModal({ isOpen, onClose, onSave, editProduct }: Props
 
               {/* Ligne 3 : Image */}
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                <label htmlFor="product-image" className="block text-sm font-medium text-slate-700 mb-1.5">
                   URL de l'image
                 </label>
                 <div className="relative">
@@ -178,7 +184,9 @@ export function ProductFormModal({ isOpen, onClose, onSave, editProduct }: Props
                   />
                   <input
                     type="url"
+                    id="product-image"
                     name="image"
+                    autoComplete="url"
                     value={form.image}
                     onChange={handleChange}
                     placeholder="https://images.unsplash.com/..."
@@ -202,11 +210,13 @@ export function ProductFormModal({ isOpen, onClose, onSave, editProduct }: Props
 
               {/* Ligne 4 : Description */}
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                <label htmlFor="product-description" className="block text-sm font-medium text-slate-700 mb-1.5">
                   Description
                 </label>
                 <textarea
+                  id="product-description"
                   name="description"
+                  autoComplete="off"
                   value={form.description}
                   onChange={handleChange}
                   placeholder="Description du produit..."
@@ -220,6 +230,7 @@ export function ProductFormModal({ isOpen, onClose, onSave, editProduct }: Props
                 <label className="flex items-center gap-2.5 cursor-pointer">
                   <input
                     type="checkbox"
+                    id="product-inStock"
                     name="inStock"
                     checked={form.inStock}
                     onChange={handleChange}
@@ -230,6 +241,7 @@ export function ProductFormModal({ isOpen, onClose, onSave, editProduct }: Props
                 <label className="flex items-center gap-2.5 cursor-pointer">
                   <input
                     type="checkbox"
+                    id="product-featured"
                     name="featured"
                     checked={form.featured}
                     onChange={handleChange}
