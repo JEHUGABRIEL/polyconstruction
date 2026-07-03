@@ -66,7 +66,7 @@ export function Navbar() {
               className="flex items-center gap-2 bg-red-600 text-white px-4 py-2 rounded-md font-medium hover:bg-red-700 transition-colors">
               
               <Phone size={18} />
-              <span>+236 74 21 22 89</span>
+              <span>Nous consulter</span>
             </a>
           </div>
 
@@ -107,7 +107,7 @@ export function Navbar() {
               className="flex items-center justify-center gap-2 w-full bg-red-600 text-white px-4 py-3 rounded-md font-medium">
               
                 <Phone size={18} />
-                <span>Appeler maintenant</span>
+                <span>Nous consulter</span>
               </a>
             </div>
           </div>

@@ -13,6 +13,7 @@ import { Realisations } from './pages/Realisations';
 import { AdminDashboard } from './pages/AdminDashboard';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
+import { FloatingContactButton } from './components/FloatingContactButton';
 import { SiteProvider } from './context/SiteContext';
 
 function AppLayout() {
@@ -22,6 +23,7 @@ function AppLayout() {
   return (
     <div className="min-h-screen flex flex-col font-sans text-slate-800 bg-slate-50">
       {!isAdmin && <Navbar />}
+      {!isAdmin && <FloatingContactButton />}
       <main className={isAdmin ? '' : 'flex-grow'}>
         <Routes>
           <Route path="/" element={<Home />} />
