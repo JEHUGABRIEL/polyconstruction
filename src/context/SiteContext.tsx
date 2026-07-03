@@ -1,4 +1,4 @@
-import React, { useEffect, useState, createContext, useContext } from 'react';
+import { useEffect, useState, createContext, useContext, type ReactNode } from 'react';
 export type Product = {
   id: string;
   name: string;

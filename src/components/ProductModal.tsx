@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ShoppingCart, CheckCircle2, AlertCircle } from 'lucide-react';
 import { Product, useSiteData } from '../context/SiteContext';

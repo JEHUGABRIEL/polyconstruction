@@ -568,8 +568,6 @@ export function AdminDashboard() {
                           : products;
                         const start = productPage * ITEMS_PER_PAGE_TABLE;
                         const paged = filtered.slice(start, start + ITEMS_PER_PAGE_TABLE);
-                        const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE_TABLE) || 1;
-
                         if (paged.length === 0) {
                           return (
                             <tr>

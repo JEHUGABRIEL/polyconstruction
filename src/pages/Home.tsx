@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   ArrowRight,
@@ -6,7 +6,6 @@ import {
   HardHat,
   Ruler,
   PenTool,
-  Truck,
   ShieldCheck,
   Clock,
   ThumbsUp,

@@ -1,4 +1,3 @@
-import React from 'react';
 import { MapPin, Phone, Mail, Clock, Send } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useSiteData } from '../context/SiteContext';

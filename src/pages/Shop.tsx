@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ShoppingCart, Search, Filter, Eye } from 'lucide-react';
+import { Search, Filter, Eye } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useSiteData, Product } from '../context/SiteContext';
 import { HeroSlider } from '../components/HeroSlider';
