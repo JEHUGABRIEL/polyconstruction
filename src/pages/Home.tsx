@@ -17,13 +17,13 @@ import { motion } from 'framer-motion';
 import { useSiteData, Product } from '../context/SiteContext';
 import { HeroSlider } from '../components/HeroSlider';
 import { TestimonialSlider } from '../components/TestimonialSlider';
+import { ProjectSlider } from '../components/ProjectSlider';
 import { ProductModal } from '../components/ProductModal';
 export function Home() {
   const { settings, services, projects, testimonials, products } = useSiteData();
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const featuredProducts = products.filter((p) => p.featured).slice(0, 3);
-  const recentProjects = projects.slice(0, 3);
   const openProductModal = (product: Product) => {
     setSelectedProduct(product);
     setIsModalOpen(true);
@@ -83,6 +83,103 @@ export function Home() {
           </Link>
         </div>
       </HeroSlider>
+
+      {/* Qui sommes-nous */}
+      <section className="py-20 bg-slate-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
+            {/* Left: Image */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="lg:w-1/2 w-full"
+            >
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+                <img
+                  src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+                  alt="Poly Construction Services"
+                  className="w-full h-[300px] sm:h-[400px] object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
+                <div className="absolute bottom-6 left-6 right-6">
+                  <div className="inline-flex items-center gap-3 bg-white/90 backdrop-blur-sm px-5 py-3 rounded-xl shadow-lg">
+                    <div className="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center text-white font-bold">
+                      PCS
+                    </div>
+                    <div>
+                      <p className="text-sm font-bold text-slate-900">
+                        Poly Construction Services
+                      </p>
+                      <p className="text-xs text-slate-500">BTP &amp; Ingénierie</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Right: Text */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="lg:w-1/2 w-full"
+            >
+              <p className="text-red-600 font-bold uppercase tracking-widest text-sm mb-3">
+                À propos
+              </p>
+              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-6">
+                Qui sommes-nous ?
+              </h2>
+              <div className="w-20 h-1 bg-red-600 rounded-full mb-8"></div>
+
+              <div className="space-y-5 text-slate-600 leading-relaxed">
+                <p>
+                  <strong className="text-slate-900">Poly Construction Services (P.C.S - BTP)</strong>{' '}
+                  est une entreprise centrafricaine spécialisée dans le Bâtiment et les Travaux Publics.
+                  Basée à Bangui, nous mettons notre expertise au service de tous vos projets de
+                  construction, de la conception à la réalisation.
+                </p>
+                <p>
+                  Notre équipe est composée d&apos;ingénieurs, d&apos;architectes et de techniciens
+                  qualifiés, animés par une même passion : bâtir un cadre de vie durable et de
+                  qualité pour nos concitoyens. Chaque projet est pour nous une opportunité de
+                  démontrer notre savoir-faire et notre engagement.
+                </p>
+                <p>
+                  Que vous soyez un particulier, une entreprise ou une institution, nous vous
+                  accompagnons avec professionnalisme, transparence et rigueur, du premier coup
+                  de crayon à la remise des clés.
+                </p>
+              </div>
+
+              <div className="flex flex-wrap gap-8 mt-10 pt-8 border-t border-slate-200">
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-red-600">+10</div>
+                  <p className="text-sm text-slate-500 mt-1">Années d&apos;expérience</p>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-red-600">+50</div>
+                  <p className="text-sm text-slate-500 mt-1">Projets réalisés</p>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-red-600">+100</div>
+                  <p className="text-sm text-slate-500 mt-1">Clients satisfaits</p>
+                </div>
+              </div>
+
+              <div className="mt-8">
+                <Link
+                  to="/contact"
+                  className="inline-flex items-center gap-2 bg-red-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-red-700 transition-colors"
+                >
+                  Nous contacter <ArrowRight size={18} />
+                </Link>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
 
       {/* Services Overview */}
       <section className="py-20 bg-white">
@@ -337,71 +434,15 @@ export function Home() {
         </div>
       </section>
 
-      {/* Nos Réalisations Preview */}
+      {/* Nos Réalisations Preview - Slider */}
       <section className="py-20 bg-slate-900 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-end mb-12">
-            <div>
-              <h2 className="text-3xl font-bold mb-4">Nos Réalisations</h2>
-              <div className="w-24 h-1 bg-red-600 rounded-full"></div>
-            </div>
-            <Link
-              to="/realisations"
-              className="hidden sm:inline-flex items-center text-red-400 hover:text-red-300 font-medium transition-colors">
-              
-              Voir tous les projets <ArrowRight size={16} className="ml-2" />
-            </Link>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4">Nos Réalisations</h2>
+            <div className="w-24 h-1 bg-red-600 mx-auto rounded-full"></div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {recentProjects.map((project, index) =>
-            <motion.div
-              key={project.id}
-              initial={{
-                opacity: 0,
-                scale: 0.95
-              }}
-              whileInView={{
-                opacity: 1,
-                scale: 1
-              }}
-              viewport={{
-                once: true
-              }}
-              transition={{
-                delay: index * 0.1
-              }}
-              className="group relative rounded-2xl overflow-hidden aspect-[4/3] cursor-pointer">
-              
-                <img
-                src={project.image}
-                alt={project.title}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-              
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
-                <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                  <div className="text-red-400 text-sm font-bold uppercase tracking-wider mb-2">
-                    {project.category}
-                  </div>
-                  <h3 className="text-xl font-bold text-white mb-2">
-                    {project.title}
-                  </h3>
-                  <p className="text-slate-300 text-sm line-clamp-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
-                    {project.description}
-                  </p>
-                </div>
-              </motion.div>
-            )}
-          </div>
-
-          <div className="mt-8 text-center sm:hidden">
-            <Link
-              to="/realisations"
-              className="inline-flex items-center text-red-400 hover:text-red-300 font-medium transition-colors">
-              
-              Voir tous les projets <ArrowRight size={16} className="ml-2" />
-            </Link>
-          </div>
+          <ProjectSlider projects={projects} />
         </div>
       </section>
 

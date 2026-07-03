@@ -79,7 +79,7 @@ export function HeroSlider({
           ))}
         </div>
 
-        {children && <div className="relative z-10 mt-4">{children}</div>}
+        {children && <div className="relative z-10 mt-8 md:mt-4">{children}</div>}
       </div>
     </section>
   );

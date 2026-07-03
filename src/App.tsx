@@ -1,5 +1,10 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from 'react-router-dom';
 import { Home } from './pages/Home';
 import { Shop } from './pages/Shop';
 import { Services } from './pages/Services';
@@ -9,25 +14,35 @@ import { AdminDashboard } from './pages/AdminDashboard';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { SiteProvider } from './context/SiteContext';
+
+function AppLayout() {
+  const location = useLocation();
+  const isAdmin = location.pathname === '/admin';
+
+  return (
+    <div className="min-h-screen flex flex-col font-sans text-slate-800 bg-slate-50">
+      {!isAdmin && <Navbar />}
+      <main className={isAdmin ? '' : 'flex-grow'}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/realisations" element={<Realisations />} />
+          <Route path="/boutique" element={<Shop />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/admin" element={<AdminDashboard />} />
+        </Routes>
+      </main>
+      {!isAdmin && <Footer />}
+    </div>
+  );
+}
+
 export function App() {
   return (
     <SiteProvider>
       <Router>
-        <div className="min-h-screen flex flex-col font-sans text-slate-800 bg-slate-50">
-          <Navbar />
-          <main className="flex-grow">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/services" element={<Services />} />
-              <Route path="/realisations" element={<Realisations />} />
-              <Route path="/boutique" element={<Shop />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/admin" element={<AdminDashboard />} />
-            </Routes>
-          </main>
-          <Footer />
-        </div>
+        <AppLayout />
       </Router>
-    </SiteProvider>);
-
+    </SiteProvider>
+  );
 }

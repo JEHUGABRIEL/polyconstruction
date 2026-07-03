@@ -64,6 +64,9 @@ type SiteContextType = {
   addProject: (project: Project) => void;
   updateProject: (id: string, project: Partial<Project>) => void;
   deleteProject: (id: string) => void;
+  addTestimonial: (testimonial: Testimonial) => void;
+  updateTestimonial: (id: string, testimonial: Partial<Testimonial>) => void;
+  deleteTestimonial: (id: string) => void;
   updateSettings: (settings: Partial<SiteSettings>) => void;
 };
 const defaultProducts: Product[] = [
@@ -389,6 +392,21 @@ export function SiteProvider({ children }: {children: ReactNode;}) {
   );
   const deleteProject = (id: string) =>
   setProjects(projects.filter((p) => p.id !== id));
+  const addTestimonial = (testimonial: Testimonial) =>
+  setTestimonials([...testimonials, testimonial]);
+  const updateTestimonial = (id: string, updated: Partial<Testimonial>) =>
+  setTestimonials(
+    testimonials.map((t) =>
+    t.id === id ?
+    {
+      ...t,
+      ...updated
+    } :
+    t
+    )
+  );
+  const deleteTestimonial = (id: string) =>
+  setTestimonials(testimonials.filter((t) => t.id !== id));
   const updateSettings = (updated: Partial<SiteSettings>) =>
   setSettings({
     ...settings,
@@ -408,6 +426,9 @@ export function SiteProvider({ children }: {children: ReactNode;}) {
         addProject,
         updateProject,
         deleteProject,
+        addTestimonial,
+        updateTestimonial,
+        deleteTestimonial,
         updateSettings
       }}>
       
