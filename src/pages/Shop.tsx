@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { ShoppingCart, Search, Filter, Eye } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useSiteData, Product } from '../context/SiteContext';
@@ -178,6 +179,33 @@ export function Shop() {
           </div>
         </div>
       </div>
+
+      {/* CTA Section */}
+      <section className="bg-red-600 py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl font-bold text-white mb-6">
+            Prêt à démarrer votre projet ?
+          </h2>
+          <p className="text-red-100 text-lg mb-10 max-w-2xl mx-auto">
+            Contactez notre équipe d'experts dès aujourd'hui pour discuter de
+            vos besoins et obtenir un devis personnalisé.
+          </p>
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <a
+              href={`tel:${settings.contact.phone1.replace(/\s/g, '')}`}
+              className="inline-flex justify-center items-center px-8 py-4 border border-transparent text-lg font-bold rounded-md text-red-600 bg-white hover:bg-slate-50 transition-colors shadow-lg">
+              
+              Appeler le {settings.contact.phone1}
+            </a>
+            <Link
+              to="/contact"
+              className="inline-flex justify-center items-center px-8 py-4 border-2 border-white text-lg font-bold rounded-md text-white hover:bg-red-700 transition-colors">
+              
+              Nous écrire
+            </Link>
+          </div>
+        </div>
+      </section>
 
       <ProductModal
         product={selectedProduct}
