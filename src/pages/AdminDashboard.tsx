@@ -16,8 +16,10 @@ import {
   EyeOff,
   User,
   ArrowLeft,
-  Home,
   Star,
+  Search,
+  ChevronLeft,
+  ChevronRight,
 } from 'lucide-react';
 import { ConfirmModal } from '../components/ConfirmModal';
 import { ProductFormModal } from '../components/ProductFormModal';
@@ -76,6 +78,16 @@ export function AdminDashboard() {
   const [showTestimonialForm, setShowTestimonialForm] = useState(false);
   const [editingTestimonial, setEditingTestimonial] = useState<Testimonial | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  // Search & pagination state
+  const [productSearch, setProductSearch] = useState('');
+  const [productPage, setProductPage] = useState(0);
+  const [projectSearch, setProjectSearch] = useState('');
+  const [projectPage, setProjectPage] = useState(0);
+  const [testimonialSearch, setTestimonialSearch] = useState('');
+  const [testimonialPage, setTestimonialPage] = useState(0);
+  const ITEMS_PER_PAGE_TABLE = 8;
+  const ITEMS_PER_PAGE_CARDS = 6;
 
   // Local settings form state
   const [settingsForm, setSettingsForm] = useState({
@@ -381,22 +393,9 @@ export function AdminDashboard() {
               </span>
             </div>
 
-            {/* Right: Back to site + user */}
-            <div className="flex items-center gap-3">
-              <Link
-                to="/"
-                className="hidden sm:inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-slate-300 bg-slate-800 rounded-lg hover:bg-red-600 hover:text-white transition-all"
-              >
-                <Home size={16} />
-                <span className="hidden lg:inline">Retour au site</span>
-              </Link>
-              <button
-                onClick={() => setConfirmAction({ type: 'logout' })}
-                className="flex items-center gap-2 px-3 py-2 text-sm text-slate-400 hover:text-red-400 transition-colors"
-                title="Déconnexion"
-              >
-                <LogOut size={18} />
-              </button>
+            {/* Right: Title only */}
+            <div className="text-sm font-medium text-slate-300">
+              Administration
             </div>
           </div>
         </div>
@@ -441,15 +440,8 @@ export function AdminDashboard() {
             ))}
           </nav>
 
-          {/* Logout in sidebar for mobile */}
-          <div className="p-4 border-t border-slate-800 md:hidden">
-            <Link
-              to="/"
-              className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-slate-800 text-slate-300 rounded-lg hover:bg-red-600 hover:text-white transition-colors mb-2"
-            >
-              <Home size={18} />
-              <span className="font-medium">Retour au site</span>
-            </Link>
+          {/* Logout button at sidebar bottom */}
+          <div className="p-4 border-t border-slate-800">
             <button
               onClick={() => setConfirmAction({ type: 'logout' })}
               className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-slate-800 text-slate-300 rounded-lg hover:bg-red-600 hover:text-white transition-colors"
@@ -518,7 +510,7 @@ export function AdminDashboard() {
 
             {activeTab === 'products' && (
               <div>
-                <div className="flex justify-between items-center mb-8">
+                <div className="flex justify-between items-center mb-6">
                   <h1 className="text-3xl font-bold text-slate-900">
                     Gestion des Produits
                   </h1>
@@ -529,6 +521,22 @@ export function AdminDashboard() {
                     <Plus size={18} /> Ajouter
                   </button>
                 </div>
+
+                {/* Search bar */}
+                <div className="relative mb-4">
+                  <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+                  <input
+                    type="text"
+                    value={productSearch}
+                    onChange={(e) => {
+                      setProductSearch(e.target.value);
+                      setProductPage(0);
+                    }}
+                    placeholder="Rechercher un produit..."
+                    className="w-full pl-10 pr-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none"
+                  />
+                </div>
+
                 <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
                   <table className="w-full text-left border-collapse">
                     <thead>
@@ -549,62 +557,142 @@ export function AdminDashboard() {
                       </tr>
                     </thead>
                     <tbody>
-                      {products.map((product) => (
-                        <tr
-                          key={product.id}
-                          className="border-b border-slate-100 hover:bg-slate-50"
-                        >
-                          <td className="p-4 flex items-center gap-3">
-                            <img
-                              src={product.image}
-                              alt={product.name}
-                              className="w-10 h-10 rounded object-cover"
-                            />
-                            <span className="font-medium text-slate-900">
-                              {product.name}
-                            </span>
-                          </td>
-                          <td className="p-4 text-slate-600">
-                            {product.category}
-                          </td>
-                          <td className="p-4 text-slate-900 font-medium">
-                            {product.price}
-                          </td>
-                          <td className="p-4">
-                            <span
-                              className={`px-2 py-1 rounded text-xs font-bold ${
-                                product.inStock
-                                  ? 'bg-green-100 text-green-700'
-                                  : 'bg-red-100 text-red-700'
-                              }`}
-                            >
-                              {product.inStock ? 'En stock' : 'Rupture'}
-                            </span>
-                          </td>
-                          <td className="p-4 text-right">
-                            <button
-                              onClick={() => handleOpenEditProduct(product)}
-                              className="p-2 text-slate-400 hover:text-blue-600 transition-colors"
-                            >
-                              <Edit2 size={18} />
-                            </button>
-                            <button
-                              onClick={() =>
-                                setConfirmAction({
-                                  type: 'delete-product',
-                                  id: product.id,
-                                  label: product.name,
-                                })
-                              }
-                              className="p-2 text-slate-400 hover:text-red-600 transition-colors"
-                            >
-                              <Trash2 size={18} />
-                            </button>
-                          </td>
-                        </tr>
-                      ))}
+                      {(() => {
+                        const q = productSearch.toLowerCase();
+                        const filtered = q
+                          ? products.filter((p) =>
+                              p.name.toLowerCase().includes(q) ||
+                              p.category.toLowerCase().includes(q) ||
+                              p.price.toLowerCase().includes(q)
+                            )
+                          : products;
+                        const start = productPage * ITEMS_PER_PAGE_TABLE;
+                        const paged = filtered.slice(start, start + ITEMS_PER_PAGE_TABLE);
+                        const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE_TABLE) || 1;
+
+                        if (paged.length === 0) {
+                          return (
+                            <tr>
+                              <td colSpan={5} className="p-8 text-center text-slate-500">
+                                Aucun produit trouvé
+                              </td>
+                            </tr>
+                          );
+                        }
+
+                        return paged.map((product) => (
+                          <tr
+                            key={product.id}
+                            className="border-b border-slate-100 hover:bg-slate-50"
+                          >
+                            <td className="p-4 flex items-center gap-3">
+                              <img
+                                src={product.image}
+                                alt={product.name}
+                                className="w-10 h-10 rounded object-cover"
+                              />
+                              <span className="font-medium text-slate-900">
+                                {product.name}
+                              </span>
+                            </td>
+                            <td className="p-4 text-slate-600">
+                              {product.category}
+                            </td>
+                            <td className="p-4 text-slate-900 font-medium">
+                              {product.price}
+                            </td>
+                            <td className="p-4">
+                              <span
+                                className={`px-2 py-1 rounded text-xs font-bold ${
+                                  product.inStock
+                                    ? 'bg-green-100 text-green-700'
+                                    : 'bg-red-100 text-red-700'
+                                }`}
+                              >
+                                {product.inStock ? 'En stock' : 'Rupture'}
+                              </span>
+                            </td>
+                            <td className="p-4 text-right">
+                              <button
+                                onClick={() => handleOpenEditProduct(product)}
+                                className="p-2 text-slate-400 hover:text-blue-600 transition-colors"
+                              >
+                                <Edit2 size={18} />
+                              </button>
+                              <button
+                                onClick={() =>
+                                  setConfirmAction({
+                                    type: 'delete-product',
+                                    id: product.id,
+                                    label: product.name,
+                                  })
+                                }
+                                className="p-2 text-slate-400 hover:text-red-600 transition-colors"
+                              >
+                                <Trash2 size={18} />
+                              </button>
+                            </td>
+                          </tr>
+                        ));
+                      })()}
                     </tbody>
                   </table>
+
+                  {/* Pagination */}
+                  <div className="flex items-center justify-between px-4 py-3 border-t border-slate-100">
+                    <span className="text-sm text-slate-500">
+                      {(() => {
+                        const q = productSearch.toLowerCase();
+                        const filtered = q
+                          ? products.filter((p) =>
+                              p.name.toLowerCase().includes(q) ||
+                              p.category.toLowerCase().includes(q) ||
+                              p.price.toLowerCase().includes(q)
+                            )
+                          : products;
+                        const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE_TABLE) || 1;
+                        return `Page ${productPage + 1} / ${totalPages} (${filtered.length} produits)`;
+                      })()}
+                    </span>
+                    <div className="flex items-center gap-1">
+                      <button
+                        onClick={() => setProductPage(Math.max(0, productPage - 1))}
+                        disabled={productPage === 0}
+                        className="p-2 rounded text-slate-500 hover:bg-slate-100 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                      >
+                        <ChevronLeft size={18} />
+                      </button>
+                      <button
+                        onClick={() => {
+                          const q = productSearch.toLowerCase();
+                          const filtered = q
+                            ? products.filter((p) =>
+                                p.name.toLowerCase().includes(q) ||
+                                p.category.toLowerCase().includes(q) ||
+                                p.price.toLowerCase().includes(q)
+                              )
+                            : products;
+                          const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE_TABLE) || 1;
+                          setProductPage(Math.min(totalPages - 1, productPage + 1));
+                        }}
+                        disabled={(() => {
+                          const q = productSearch.toLowerCase();
+                          const filtered = q
+                            ? products.filter((p) =>
+                                p.name.toLowerCase().includes(q) ||
+                                p.category.toLowerCase().includes(q) ||
+                                p.price.toLowerCase().includes(q)
+                              )
+                            : products;
+                          const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE_TABLE) || 1;
+                          return productPage >= totalPages - 1;
+                        })()}
+                        className="p-2 rounded text-slate-500 hover:bg-slate-100 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                      >
+                        <ChevronRight size={18} />
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
             )}
@@ -756,7 +844,7 @@ export function AdminDashboard() {
 
             {activeTab === 'projects' && (
               <div>
-                <div className="flex justify-between items-center mb-8">
+                <div className="flex justify-between items-center mb-6">
                   <h1 className="text-3xl font-bold text-slate-900">
                     Gestion des Réalisations
                   </h1>
@@ -767,6 +855,22 @@ export function AdminDashboard() {
                     <Plus size={18} /> Ajouter
                   </button>
                 </div>
+
+                {/* Search bar */}
+                <div className="relative mb-4">
+                  <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+                  <input
+                    type="text"
+                    value={projectSearch}
+                    onChange={(e) => {
+                      setProjectSearch(e.target.value);
+                      setProjectPage(0);
+                    }}
+                    placeholder="Rechercher un projet..."
+                    className="w-full pl-10 pr-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none"
+                  />
+                </div>
+
                 <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
                   <table className="w-full text-left border-collapse">
                     <thead>
@@ -784,65 +888,144 @@ export function AdminDashboard() {
                       </tr>
                     </thead>
                     <tbody>
-                      {projects.map((project) => (
-                        <tr
-                          key={project.id}
-                          className="border-b border-slate-100 hover:bg-slate-50"
-                        >
-                          <td className="p-4 flex items-center gap-3">
-                            <img
-                              src={project.image}
-                              alt={project.title}
-                              className="w-10 h-10 rounded object-cover"
-                            />
-                            <div>
-                              <span className="font-medium text-slate-900 block">
-                                {project.title}
+                      {(() => {
+                        const q = projectSearch.toLowerCase();
+                        const filtered = q
+                          ? projects.filter((p) =>
+                              p.title.toLowerCase().includes(q) ||
+                              p.category.toLowerCase().includes(q) ||
+                              p.description.toLowerCase().includes(q)
+                            )
+                          : projects;
+                        const start = projectPage * ITEMS_PER_PAGE_TABLE;
+                        const paged = filtered.slice(start, start + ITEMS_PER_PAGE_TABLE);
+
+                        if (paged.length === 0) {
+                          return (
+                            <tr>
+                              <td colSpan={4} className="p-8 text-center text-slate-500">
+                                Aucun projet trouvé
+                              </td>
+                            </tr>
+                          );
+                        }
+
+                        return paged.map((project) => (
+                          <tr
+                            key={project.id}
+                            className="border-b border-slate-100 hover:bg-slate-50"
+                          >
+                            <td className="p-4 flex items-center gap-3">
+                              <img
+                                src={project.image}
+                                alt={project.title}
+                                className="w-10 h-10 rounded object-cover"
+                              />
+                              <div>
+                                <span className="font-medium text-slate-900 block">
+                                  {project.title}
+                                </span>
+                                <span className="text-xs text-slate-500 line-clamp-1">
+                                  {project.description}
+                                </span>
+                              </div>
+                            </td>
+                            <td className="p-4">
+                              <span className="px-2 py-1 rounded text-xs font-bold bg-slate-100 text-slate-700">
+                                {project.category}
                               </span>
-                              <span className="text-xs text-slate-500 line-clamp-1">
-                                {project.description}
-                              </span>
-                            </div>
-                          </td>
-                          <td className="p-4">
-                            <span className="px-2 py-1 rounded text-xs font-bold bg-slate-100 text-slate-700">
-                              {project.category}
-                            </span>
-                          </td>
-                          <td className="p-4 text-slate-600">
-                            {project.date}
-                          </td>
-                          <td className="p-4 text-right">
-                            <button
-                              onClick={() => handleOpenEditProject(project)}
-                              className="p-2 text-slate-400 hover:text-blue-600 transition-colors"
-                            >
-                              <Edit2 size={18} />
-                            </button>
-                            <button
-                              onClick={() =>
-                                setConfirmAction({
-                                  type: 'delete-project',
-                                  id: project.id,
-                                  label: project.title,
-                                })
-                              }
-                              className="p-2 text-slate-400 hover:text-red-600 transition-colors"
-                            >
-                              <Trash2 size={18} />
-                            </button>
-                          </td>
-                        </tr>
-                      ))}
+                            </td>
+                            <td className="p-4 text-slate-600">
+                              {project.date}
+                            </td>
+                            <td className="p-4 text-right">
+                              <button
+                                onClick={() => handleOpenEditProject(project)}
+                                className="p-2 text-slate-400 hover:text-blue-600 transition-colors"
+                              >
+                                <Edit2 size={18} />
+                              </button>
+                              <button
+                                onClick={() =>
+                                  setConfirmAction({
+                                    type: 'delete-project',
+                                    id: project.id,
+                                    label: project.title,
+                                  })
+                                }
+                                className="p-2 text-slate-400 hover:text-red-600 transition-colors"
+                              >
+                                <Trash2 size={18} />
+                              </button>
+                            </td>
+                          </tr>
+                        ));
+                      })()}
                     </tbody>
                   </table>
+
+                  {/* Pagination */}
+                  <div className="flex items-center justify-between px-4 py-3 border-t border-slate-100">
+                    <span className="text-sm text-slate-500">
+                      {(() => {
+                        const q = projectSearch.toLowerCase();
+                        const filtered = q
+                          ? projects.filter((p) =>
+                              p.title.toLowerCase().includes(q) ||
+                              p.category.toLowerCase().includes(q) ||
+                              p.description.toLowerCase().includes(q)
+                            )
+                          : projects;
+                        const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE_TABLE) || 1;
+                        return `Page ${projectPage + 1} / ${totalPages} (${filtered.length} projets)`;
+                      })()}
+                    </span>
+                    <div className="flex items-center gap-1">
+                      <button
+                        onClick={() => setProjectPage(Math.max(0, projectPage - 1))}
+                        disabled={projectPage === 0}
+                        className="p-2 rounded text-slate-500 hover:bg-slate-100 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                      >
+                        <ChevronLeft size={18} />
+                      </button>
+                      <button
+                        onClick={() => {
+                          const q = projectSearch.toLowerCase();
+                          const filtered = q
+                            ? projects.filter((p) =>
+                                p.title.toLowerCase().includes(q) ||
+                                p.category.toLowerCase().includes(q) ||
+                                p.description.toLowerCase().includes(q)
+                              )
+                            : projects;
+                          const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE_TABLE) || 1;
+                          setProjectPage(Math.min(totalPages - 1, projectPage + 1));
+                        }}
+                        disabled={(() => {
+                          const q = projectSearch.toLowerCase();
+                          const filtered = q
+                            ? projects.filter((p) =>
+                                p.title.toLowerCase().includes(q) ||
+                                p.category.toLowerCase().includes(q) ||
+                                p.description.toLowerCase().includes(q)
+                              )
+                            : projects;
+                          const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE_TABLE) || 1;
+                          return projectPage >= totalPages - 1;
+                        })()}
+                        className="p-2 rounded text-slate-500 hover:bg-slate-100 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                      >
+                        <ChevronRight size={18} />
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
             )}
 
             {activeTab === 'testimonials' && (
               <div>
-                <div className="flex justify-between items-center mb-8">
+                <div className="flex justify-between items-center mb-6">
                   <h1 className="text-3xl font-bold text-slate-900">
                     Gestion des Témoignages
                   </h1>
@@ -853,75 +1036,137 @@ export function AdminDashboard() {
                     <Plus size={18} /> Ajouter
                   </button>
                 </div>
-                <div className="grid gap-4">
-                  {testimonials.map((testimonial) => (
-                    <div
-                      key={testimonial.id}
-                      className="bg-white rounded-xl shadow-sm border border-slate-200 p-6"
-                    >
-                      <div className="flex items-start justify-between">
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-center gap-2 mb-1">
-                            <div className="w-10 h-10 rounded-full bg-slate-900 text-white flex items-center justify-center font-bold text-sm flex-shrink-0">
-                              {testimonial.name.charAt(0).toUpperCase()}
-                            </div>
-                            <div>
-                              <h3 className="font-bold text-slate-900">
-                                {testimonial.name}
-                              </h3>
-                              <p className="text-xs text-slate-500">
-                                {testimonial.role}
-                              </p>
-                            </div>
-                          </div>
-                          <div className="flex items-center gap-0.5 mb-2 mt-2">
-                            {[1, 2, 3, 4, 5].map((star) => (
-                              <Star
-                                key={star}
-                                size={14}
-                                className={star <= testimonial.rating ? 'text-yellow-400 fill-yellow-400' : 'text-slate-300'}
-                              />
-                            ))}
-                          </div>
-                          <p className="text-sm text-slate-600 leading-relaxed">
-                            &ldquo;{testimonial.content}&rdquo;
-                          </p>
-                        </div>
-                        <div className="flex items-center gap-1 ml-4 flex-shrink-0">
-                          <button
-                            onClick={() => handleOpenEditTestimonial(testimonial)}
-                            className="p-2 text-slate-400 hover:text-blue-600 transition-colors"
-                          >
-                            <Edit2 size={18} />
-                          </button>
-                          <button
-                            onClick={() =>
-                              setConfirmAction({
-                                type: 'delete-testimonial',
-                                id: testimonial.id,
-                                label: testimonial.name,
-                              })
-                            }
-                            className="p-2 text-slate-400 hover:text-red-600 transition-colors"
-                          >
-                            <Trash2 size={18} />
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                  {testimonials.length === 0 && (
-                    <div className="flex flex-col items-center justify-center h-48 bg-white rounded-xl border border-slate-200 border-dashed">
-                      <MessageSquare size={32} className="text-slate-400 mb-3" />
-                      <p className="text-slate-500 font-medium">
-                        Aucun témoignage pour le moment
-                      </p>
-                      <p className="text-slate-400 text-sm mt-1">
-                        Cliquez sur &quot;Ajouter&quot; pour créer le premier témoignage.
-                      </p>
-                    </div>
-                  )}
+
+                {/* Search bar */}
+                <div className="relative mb-4">
+                  <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+                  <input
+                    type="text"
+                    value={testimonialSearch}
+                    onChange={(e) => {
+                      setTestimonialSearch(e.target.value);
+                      setTestimonialPage(0);
+                    }}
+                    placeholder="Rechercher un témoignage..."
+                    className="w-full pl-10 pr-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 outline-none"
+                  />
                 </div>
+
+                {(() => {
+                  const q = testimonialSearch.toLowerCase();
+                  const filtered = q
+                    ? testimonials.filter((t) =>
+                        t.name.toLowerCase().includes(q) ||
+                        t.role.toLowerCase().includes(q) ||
+                        t.content.toLowerCase().includes(q)
+                      )
+                    : testimonials;
+                  const start = testimonialPage * ITEMS_PER_PAGE_CARDS;
+                  const paged = filtered.slice(start, start + ITEMS_PER_PAGE_CARDS);
+                  const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE_CARDS) || 1;
+
+                  return (
+                    <>
+                      <div className="grid gap-4">
+                        {paged.length === 0 ? (
+                          <div className="flex flex-col items-center justify-center h-48 bg-white rounded-xl border border-slate-200 border-dashed">
+                            <MessageSquare size={32} className="text-slate-400 mb-3" />
+                            <p className="text-slate-500 font-medium">
+                              Aucun témoignage trouvé
+                            </p>
+                            {!q && (
+                              <p className="text-slate-400 text-sm mt-1">
+                                Cliquez sur &quot;Ajouter&quot; pour créer le premier témoignage.
+                              </p>
+                            )}
+                          </div>
+                        ) : (
+                          paged.map((testimonial) => (
+                            <div
+                              key={testimonial.id}
+                              className="bg-white rounded-xl shadow-sm border border-slate-200 p-6"
+                            >
+                              <div className="flex items-start justify-between">
+                                <div className="flex-1 min-w-0">
+                                  <div className="flex items-center gap-2 mb-1">
+                                    <div className="w-10 h-10 rounded-full bg-slate-900 text-white flex items-center justify-center font-bold text-sm flex-shrink-0">
+                                      {testimonial.name.charAt(0).toUpperCase()}
+                                    </div>
+                                    <div>
+                                      <h3 className="font-bold text-slate-900">
+                                        {testimonial.name}
+                                      </h3>
+                                      <p className="text-xs text-slate-500">
+                                        {testimonial.role}
+                                      </p>
+                                    </div>
+                                  </div>
+                                  <div className="flex items-center gap-0.5 mb-2 mt-2">
+                                    {[1, 2, 3, 4, 5].map((star) => (
+                                      <Star
+                                        key={star}
+                                        size={14}
+                                        className={star <= testimonial.rating ? 'text-yellow-400 fill-yellow-400' : 'text-slate-300'}
+                                      />
+                                    ))}
+                                  </div>
+                                  <p className="text-sm text-slate-600 leading-relaxed">
+                                    &ldquo;{testimonial.content}&rdquo;
+                                  </p>
+                                </div>
+                                <div className="flex items-center gap-1 ml-4 flex-shrink-0">
+                                  <button
+                                    onClick={() => handleOpenEditTestimonial(testimonial)}
+                                    className="p-2 text-slate-400 hover:text-blue-600 transition-colors"
+                                  >
+                                    <Edit2 size={18} />
+                                  </button>
+                                  <button
+                                    onClick={() =>
+                                      setConfirmAction({
+                                        type: 'delete-testimonial',
+                                        id: testimonial.id,
+                                        label: testimonial.name,
+                                      })
+                                    }
+                                    className="p-2 text-slate-400 hover:text-red-600 transition-colors"
+                                  >
+                                    <Trash2 size={18} />
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          ))
+                        )}
+                      </div>
+
+                      {/* Pagination */}
+                      {filtered.length > 0 && (
+                        <div className="flex items-center justify-between mt-4 px-1">
+                          <span className="text-sm text-slate-500">
+                            Page {testimonialPage + 1} / {totalPages} ({filtered.length} témoignages)
+                          </span>
+                          <div className="flex items-center gap-1">
+                            <button
+                              onClick={() => setTestimonialPage(Math.max(0, testimonialPage - 1))}
+                              disabled={testimonialPage === 0}
+                              className="p-2 rounded text-slate-500 hover:bg-slate-100 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                            >
+                              <ChevronLeft size={18} />
+                            </button>
+                            <button
+                              onClick={() => setTestimonialPage(Math.min(totalPages - 1, testimonialPage + 1))}
+                              disabled={testimonialPage >= totalPages - 1}
+                              className="p-2 rounded text-slate-500 hover:bg-slate-100 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                            >
+                              <ChevronRight size={18} />
+                            </button>
+                          </div>
+                        </div>
+                      )}
+                    </>
+                  );
+                })()}
               </div>
             )}
           </div>
