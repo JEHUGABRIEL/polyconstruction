@@ -1,27 +1,22 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCircle2, X } from 'lucide-react';
+import { setToastHandler, clearToastHandler } from './toastUtils';
 
 type ToastType = {
   message: string;
   visible: boolean;
 };
 
-let showToastFn: ((msg: string) => void) | null = null;
-
-export function showToast(message: string) {
-  if (showToastFn) showToastFn(message);
-}
-
 export function ToastContainer() {
   const [toast, setToast] = useState<ToastType>({ message: '', visible: false });
 
   useEffect(() => {
-    showToastFn = (message: string) => {
+    setToastHandler((message: string) => {
       setToast({ message, visible: true });
-    };
+    });
     return () => {
-      showToastFn = null;
+      clearToastHandler();
     };
   }, []);
 

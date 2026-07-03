@@ -436,6 +436,7 @@ export function SiteProvider({ children }: {children: ReactNode;}) {
     </SiteContext.Provider>);
 
 }
+// eslint-disable-next-line react-refresh/only-export-components
 export function useSiteData() {
   const context = useContext(SiteContext);
   if (context === undefined) {

@@ -25,7 +25,8 @@ import { ConfirmModal } from '../components/ConfirmModal';
 import { ProductFormModal } from '../components/ProductFormModal';
 import { ProjectFormModal } from '../components/ProjectFormModal';
 import { TestimonialFormModal } from '../components/TestimonialFormModal';
-import { ToastContainer, showToast } from '../components/Toast';
+import { ToastContainer } from '../components/Toast';
+import { showToast } from '../components/toastUtils';
 
 const ADMIN_PASSWORD = 'admin123';
 const AUTH_KEY = 'pcs_admin_auth';
@@ -107,7 +108,7 @@ export function AdminDashboard() {
       address: settings.contact.address,
       heroSlides: settings.heroSlides.home.map((s) => ({ ...s })),
     });
-  }, [settings.contact.phone1, settings.contact.phone2, settings.contact.email, settings.contact.address]);
+  }, [settings]);
 
   const handleSettingsSave = () => {
     updateSettings({
